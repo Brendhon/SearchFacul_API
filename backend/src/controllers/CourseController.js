@@ -57,21 +57,29 @@ const list = async (request, response) => {
         const [count] = await connection('course')
             .where('name', 'like', `%${name}%`)
             .count()
-        
 
         response.header('X-Total-Count', count['count(*)'])
-        
+
     } catch {
-        return response.status(500).json({ error: 'Curso não encontrado' })
+        return response.status(500).json({ error: 'Curso não encontrado :(' })
     }
-    
+
     try {
         // Buscando lista de cursos
         const courses = await connection('course')
+            .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
             .limit(numElements)
             .offset((page - 1) * numElements)
-            .where('name', 'like', `%${name}%`)
-            .select('*')
+            .where('course.name', 'like', `%${name}%`)
+            .select([
+                'course.*', //Selecionando todos os dados dos cursos 
+                'university.universityName',
+                'university.city',
+                'university.telephone',
+                'university.uf',
+                'university.longitude',
+                'university.latitude'
+            ])
 
         return response.json(courses)
 

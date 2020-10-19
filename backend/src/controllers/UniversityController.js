@@ -4,13 +4,13 @@ const connection = require('../database/connection')
 const create = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { name, telephone, uf, city, longitude, latitude } = request.body
+    const { universityName, telephone, uf, city, longitude, latitude } = request.body
 
     // Gerando um id aleatório de 2 bytes no formato string
     const id = crypto.randomBytes(2).toString('HEX')
 
     // Verificando integridade dos dados
-    if (!name) return response.status(400).json({ error: 'Nome inválido' })
+    if (!universityName) return response.status(400).json({ error: 'Nome inválido' })
     if (!telephone) return response.status(400).json({ error: 'Telefone inválido' })
     if (!uf) return response.status(400).json({ error: 'UF inválido' })
     if (!city) return response.status(400).json({ error: 'Cidade inválida' })
@@ -22,7 +22,7 @@ const create = async (request, response) => {
         // Inserindo dados na tabela
         await connection('university').insert({
             id,
-            name,
+            universityName,
             telephone,
             uf,
             city,
