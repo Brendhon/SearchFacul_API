@@ -14,7 +14,7 @@ routes.post('/university', UniversityController.create)
 routes.get('/profile', ProfileController.list)
 
 // Rotas pertencentes aos cursos
-routes.get('/course', CourseController.list)
+routes.get('/course/:name', CourseController.list)
 routes.post('/course', CourseController.create)
 routes.delete('/course/:id', CourseController.remove)
 

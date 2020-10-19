@@ -37,13 +37,23 @@ const create = async (request, response) => {
 }
 
 const list = async (request, response) => {
+
+    // Pegando o Curso escolhido pelo usuário 
+    const { name } = request.params
+
+    // Verificando integridade dos dados
+    if (!name) return response.status(400).json({ error: 'Necessita do nome do curso desejado' })
+
     try {
         // Buscando lista de cursos
-        const courses = await connection('course').select('*')
+        const courses = await connection('course')
+            .where('name','like',`%${name}%`)
+            .select('*')
+
         return response.json(courses)
 
     } catch {
-        return response.status(500).json({ error: 'Falha ao buscar' })
+        return response.status(500).json({ error: 'Curso não encontrado' })
     }
 }
 
