@@ -41,13 +41,36 @@ const list = async (request, response) => {
     // Pegando o Curso escolhido pelo usuário 
     const { name } = request.params
 
+    // Pegando o Curso escolhido pelo usuário 
+    const { page = 1 } = request.query
+
+    // Numero de elementos que serão retornados
+    const numElements = 5
+
     // Verificando integridade dos dados
     if (!name) return response.status(400).json({ error: 'Necessita do nome do curso desejado' })
+    if (!page) return response.status(400).json({ error: 'Pagina fora do limite' })
 
+    try {
+
+        // Pegando o numero de cursos resultantes da busca
+        const [count] = await connection('course')
+            .where('name', 'like', `%${name}%`)
+            .count()
+        
+
+        response.header('X-Total-Count', count['count(*)'])
+        
+    } catch {
+        return response.status(500).json({ error: 'Curso não encontrado' })
+    }
+    
     try {
         // Buscando lista de cursos
         const courses = await connection('course')
-            .where('name','like',`%${name}%`)
+            .limit(numElements)
+            .offset((page - 1) * numElements)
+            .where('name', 'like', `%${name}%`)
             .select('*')
 
         return response.json(courses)
