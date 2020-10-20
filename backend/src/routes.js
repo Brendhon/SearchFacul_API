@@ -8,12 +8,13 @@ const SessionController = require('./controllers/SessionController')
 const CourseValidator = require('./validators/CourseValidator')
 const ProfileValidator = require('./validators/ProfileValidator')
 const UniversityValidator = require('./validators/UniversityValidator')
+const SessionValidator = require('./validators/SessionValidator')
 
 // Extraindo o modulo Rotas do express e atribuindo-o a uma variável
 const routes = express.Router()
 
 // Rota para o Login (Sessão) da universidade
-routes.post('/session', SessionController.create)
+routes.post('/session', SessionValidator.sessionPost(), SessionController.create)
 
 // Rotas pertencentes a Universidades
 routes.get('/university', UniversityController.list)
