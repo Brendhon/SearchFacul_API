@@ -8,13 +8,6 @@ const create = async (request, response) => {
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const university_id = request.headers.authorization
 
-    // Verificando integridade dos dados
-    if (!name) return response.status(400).json({ error: 'Nome inválido' })
-    if (!email) return response.status(400).json({ error: 'Email inválido' })
-    if (!description) return response.status(400).json({ error: 'Descrição inválida' })
-    if (!(score > 1 && score <= 5)) return response.status(400).json({ error: 'Pontuação inválida' })
-    if (!university_id) return response.status(401).json({ error: 'Não autorizado' })
-
     try {
 
         // Realizando um destruction no array resultado da inserção para pegar o id gerado
@@ -31,7 +24,7 @@ const create = async (request, response) => {
 
     } catch {
 
-        return response.status(500).json({ error: 'Falha ao criar' })
+        return response.status(500).json({ message: 'Falha ao criar' })
 
     }
 }
@@ -47,10 +40,6 @@ const list = async (request, response) => {
     // Numero de elementos que serão retornados
     const numElements = 5
 
-    // Verificando integridade dos dados
-    if (!name) return response.status(400).json({ error: 'Necessita do nome do curso desejado' })
-    if (!page) return response.status(400).json({ error: 'Pagina fora do limite' })
-
     try {
 
         // Pegando o numero de cursos resultantes da busca
@@ -61,7 +50,7 @@ const list = async (request, response) => {
         response.header('X-Total-Count', count['count(*)'])
 
     } catch {
-        return response.status(500).json({ error: 'Curso não encontrado :(' })
+        return response.status(400).json({ message: 'Curso não encontrado :(' })
     }
 
     try {
@@ -84,7 +73,7 @@ const list = async (request, response) => {
         return response.json(courses)
 
     } catch {
-        return response.status(500).json({ error: 'Curso não encontrado' })
+        return response.status(400).json({ message: 'Curso não encontrado' })
     }
 }
 
@@ -96,10 +85,6 @@ const remove = async (request, response) => {
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const university_id = request.headers.authorization
 
-    // Verificando integridade dos dados
-    if (!id) return response.status(400).json({ error: 'Necessita de um ID' })
-    if (!university_id) return response.status(401).json({ error: 'Não autorizado' })
-
     try {
 
         const courses = await connection('course')
@@ -108,11 +93,11 @@ const remove = async (request, response) => {
             .first() // Pegando o primeiro que ele encontrar
 
         // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso (EVITAR QUE UMA UNIVERSIDADE EXCLUA O CURSO DE OUTRA)
-        if (university_id != courses.university_id) return response.status(401).json({ error: 'Operação não permitida' })
+        if (university_id != courses.university_id) return response.status(401).json({ message: 'Operação não permitida' })
 
     } catch {
 
-        return response.status(500).json({ error: 'Falha ao buscar' })
+        return response.status(400).json({ message: 'Falha ao buscar' })
 
     }
 
@@ -126,7 +111,7 @@ const remove = async (request, response) => {
 
     } catch {
 
-        return response.status(500).json({ error: 'Falha ao deletar' })
+        return response.status(500).json({ message: 'Falha ao deletar' })
 
     }
 }
