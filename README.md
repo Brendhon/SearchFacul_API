@@ -5,6 +5,7 @@ Este projeto tem como objetivo colocar em prática os conhecimentos adquiridos n
 As principais ferramentas utilizadas na construção do projeto:
  * [Express](https://expressjs.com/pt-br/)
  * [Knex.js](http://knexjs.org/)
+ * [Celebrate](https://github.com/arb/celebrate)
 
 ## Como usar?
 
