@@ -1,6 +1,6 @@
 const { celebrate, Segments, Joi } = require('celebrate')
 
-const profilePost = _ => celebrate({
+const profileGet = _ => celebrate({
 
     [Segments.HEADERS]: Joi.object({
         authorization: Joi.string().required(),
@@ -8,4 +8,4 @@ const profilePost = _ => celebrate({
 
 })
 
-module.exports = { profilePost }
+module.exports = { profileGet }

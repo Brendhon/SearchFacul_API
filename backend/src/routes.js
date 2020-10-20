@@ -6,6 +6,7 @@ const ProfileController = require('./controllers/ProfileController')
 const SessionController = require('./controllers/SessionController')
 
 const CourseValidator = require('./validators/CourseValidator')
+const ProfileValidator = require('./validators/ProfileValidator')
 
 // Extraindo o modulo Rotas do express e atribuindo-o a uma variável
 const routes = express.Router()
@@ -18,7 +19,7 @@ routes.get('/university', UniversityController.list)
 routes.post('/university', UniversityController.create)
 
 // Rotas pertencentes a um perfil da faculdade
-routes.get('/profile', ProfileController.list)
+routes.get('/profile', ProfileValidator.profileGet(), ProfileController.list)
 
 // Rotas pertencentes aos cursos
 routes.get('/course/:name', CourseValidator.courseGet(), CourseController.list)

@@ -5,9 +5,6 @@ const list = async (request, response) => {
     
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const university_id = request.headers.authorization
-    
-    // Verificando integridade dos dados
-    if (!university_id) return response.status(401).json({ error: 'Não autorizado' })
 
     try {
 
@@ -20,7 +17,7 @@ const list = async (request, response) => {
 
     } catch {
 
-        return response.status(500).json({ error: 'Falha ao buscar' })
+        return response.status(400).json({ message: 'Falha ao buscar' })
 
     }
 }
