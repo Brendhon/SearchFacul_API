@@ -12,4 +12,12 @@ const universityPost = _ => celebrate({
     })
 })
 
-module.exports = { universityPost }
+const universityDelete = _ => celebrate({
+
+    [Segments.HEADERS]: Joi.object({
+        authorization: Joi.string().required(),
+    }).unknown() //Como vários parâmetros são enviados pelo header o "unknown()" serve para descartar os que não foram validados
+
+})
+
+module.exports = { universityPost, universityDelete }
