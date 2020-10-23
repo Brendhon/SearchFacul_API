@@ -7,8 +7,8 @@ const universityPost = _ => celebrate({
         telephone: Joi.string().trim().regex(/^[0-9]{8,11}$/).required(), // Validando se são números com limite de caracteres de 8 a 11
         uf: Joi.string().trim().regex(/^[A-Z]{2,2}$/).required(), // Validando se o UF tem duas letras maiúsculas e epenas 2 letras
         city: Joi.string().required(),
-        longitude: Joi.number().required(),
-        latitude: Joi.number().required()
+        street: Joi.string().required(),
+        number: Joi.number().required()
     })
 })
 

@@ -4,7 +4,7 @@ const connection = require('../database/connection')
 const create = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { universityName, telephone, uf, city, longitude, latitude } = request.body
+    const { universityName, telephone, uf, city, street, number } = request.body
 
     // Gerando um id aleatório de 2 bytes no formato string
     const id = crypto.randomBytes(2).toString('HEX')
@@ -18,8 +18,8 @@ const create = async (request, response) => {
             telephone,
             uf,
             city,
-            longitude,
-            latitude
+            street,
+            number
         })
 
         // Retornando o ID como resposta 
