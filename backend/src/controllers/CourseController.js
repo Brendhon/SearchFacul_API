@@ -66,8 +66,8 @@ const list = async (request, response) => {
                 'university.city',
                 'university.telephone',
                 'university.uf',
-                'university.longitude',
-                'university.latitude'
+                'university.street',
+                'university.number'
             ])
 
         return response.json(courses)
