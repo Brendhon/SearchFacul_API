@@ -39,4 +39,39 @@ const list = async (request, response) => {
     }
 }
 
-module.exports = { create, list }
+const remove = async (request, response) => {
+
+    // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
+    const id = request.headers.authorization
+
+    try {
+
+        const university = await connection('university')
+            .where('id', id)  // Comparando o ID escolhido com o do banco
+            .first() // Pegando o primeiro que ele encontrar
+
+        // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso (EVITAR QUE UMA UNIVERSIDADE EXCLUA A OUTRA)
+        if (id != university.id) return response.status(401).json({ message: 'Operação não permitida' })
+
+    } catch {
+
+        return response.status(400).json({ message: 'Falha ao buscar' })
+
+    }
+
+    try {
+
+        await connection('university')
+            .where('id', id)  // Comparando o ID escolhido com o do banco
+            .delete() // Deletando o curso no banco
+
+        return response.status(204).send()
+
+    } catch {
+
+        return response.status(500).json({ message: 'Falha ao deletar' })
+
+    }
+}
+
+module.exports = { create, list, remove }

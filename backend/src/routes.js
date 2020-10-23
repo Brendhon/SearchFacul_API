@@ -19,6 +19,7 @@ routes.post('/session', SessionValidator.sessionPost(), SessionController.create
 // Rotas pertencentes a Universidades
 routes.get('/university', UniversityController.list)
 routes.post('/university', UniversityValidator.universityPost(), UniversityController.create)
+routes.delete('/university', UniversityController.remove)
 
 // Rotas pertencentes a um perfil da faculdade
 routes.get('/profile', ProfileValidator.profileGet(), ProfileController.list)
