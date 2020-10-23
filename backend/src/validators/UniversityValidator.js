@@ -1,6 +1,6 @@
 const { celebrate, Segments, Joi } = require('celebrate')
 
-const universityPost = _ => celebrate({
+const create = _ => celebrate({
 
     [Segments.BODY]: Joi.object().keys({
         universityName: Joi.string().required(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
@@ -12,7 +12,7 @@ const universityPost = _ => celebrate({
     })
 })
 
-const universityDelete = _ => celebrate({
+const remove = _ => celebrate({
 
     [Segments.HEADERS]: Joi.object({
         authorization: Joi.string().required(),
@@ -20,4 +20,4 @@ const universityDelete = _ => celebrate({
 
 })
 
-module.exports = { universityPost, universityDelete }
+module.exports = { create, remove }

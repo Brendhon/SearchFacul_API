@@ -1,6 +1,6 @@
 const { celebrate, Segments, Joi } = require('celebrate')
 
-const coursePost = _ => celebrate({
+const create = _ => celebrate({
 
     [Segments.HEADERS]: Joi.object({
         authorization: Joi.string().required(),
@@ -14,7 +14,7 @@ const coursePost = _ => celebrate({
     })
 })
 
-const courseGet = _ => celebrate({
+const list = _ => celebrate({
 
     [Segments.PARAMS]: Joi.object().keys({
         name: Joi.string().required()
@@ -25,7 +25,7 @@ const courseGet = _ => celebrate({
     })
 })
 
-const courseDelete = _ => celebrate({
+const remove = _ => celebrate({
 
     [Segments.PARAMS]: Joi.object().keys({
         id: Joi.number().required()
@@ -37,4 +37,4 @@ const courseDelete = _ => celebrate({
 
 })
 
-module.exports = { coursePost, courseDelete, courseGet }
+module.exports = { create, list, remove }
