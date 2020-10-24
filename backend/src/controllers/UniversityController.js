@@ -91,7 +91,7 @@ const listCourses = async (request, response) => {
 
     // Descriptografando o ID
     id = decrypt(id)
-    
+
     // Pegando o Curso escolhido pelo usuário 
     const { page = 1 } = request.query
 
@@ -147,4 +147,28 @@ const remove = async (request, response) => {
 
 }
 
-module.exports = { create, listByName, listByCity, listCourses, remove }
+const update = async (request, response) => {
+
+    // Realizando um destruction no objeto vindo da requisição
+    const { universityName, telephone, uf, city, street, number } = request.body
+
+    // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
+    const id = request.headers.authorization
+
+    // Inserindo dados na tabela
+    await connection('university')
+        .where('id', id)
+        .update({
+            universityName,
+            telephone,
+            uf,
+            city,
+            street,
+            number
+        })
+        .then(_ => response.json({ id }))
+        .catch(_ => response.status(400).json({ message: 'Falha ao criar' }))
+
+}
+
+module.exports = { create, listByName, listByCity, listCourses, remove, update }
