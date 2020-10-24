@@ -8,7 +8,7 @@ const create = async (request, response) => {
 
     // Gerando um id aleatório de 2 bytes no formato string
     const id = crypto.randomBytes(2).toString('HEX')
-    
+
     // Inserindo dados na tabela
     await connection('university')
         .insert({
@@ -42,13 +42,14 @@ const listByCity = async (request, response) => {
         .count()
         .catch(_ => response.status(400).json({ message: 'Cidade não encontrada :(' }))
 
-    response.header('X-Total-Count', count['count(*)'])
-
     await connection('university')
         .limit(numElements)
         .offset((page - 1) * numElements)
         .where('city', 'like', `%${city}%`)
-        .then(universities => response.json(universities))
+        .then(universities => {
+            response.header('X-Total-Count', count['count(*)'])
+            return response.json(universities)
+        })
         .catch(_ => response.status(400).json({ message: 'Falha ao buscar as universidades da cidade' }))
 
 }
@@ -70,13 +71,14 @@ const listByName = async (request, response) => {
         .count()
         .catch(_ => response.status(400).json({ message: 'Falha ao Buscar' }))
 
-    response.header('X-Total-Count', count['count(*)'])
-
     await connection('university')
         .limit(numElements)
         .offset((page - 1) * numElements)
         .where('universityName', 'like', `%${name}%`)
-        .then(universities => response.json(universities))
+        .then(universities => {
+            response.header('X-Total-Count', count['count(*)'])
+            return response.json(universities)
+        })
         .catch(_ => response.status(400).json({ message: 'Falha ao buscar as Universidades' }))
 
 }
@@ -98,16 +100,16 @@ const listCourses = async (request, response) => {
         .count()
         .catch(_ => response.status(400).json({ message: 'Universidade não encontrado :(' }))
 
-    response.header('X-Total-Count', count['count(*)'])
-
-
     // Buscando lista de cursos referente a uma faculdade especifica 
     await connection('course')
         .limit(numElements)
         .offset((page - 1) * numElements)
         .where('university_id', id)
         .select('*')
-        .then(courses => response.json(courses))
+        .then(courses => {
+            response.header('X-Total-Count', count['count(*)'])
+            return response.json(courses)
+        })
         .catch(_ => response.status(400).json({ message: 'Falha ao buscar as Universidades' }))
 
 }
