@@ -23,7 +23,7 @@ routes.get('/profile', ProfileValidator.listCourses(), ProfileController.list)
 routes.get('/university/:id', UniversityValidator.listCourses(), UniversityController.listCourses)
 routes.get('/university/name/:name', UniversityValidator.listByName(), UniversityController.listByName)
 routes.get('/university/city/:city', UniversityValidator.listByCity(), UniversityController.listByCity)
-routes.put('/university',  UniversityController.update)
+routes.put('/university', UniversityValidator.update(), UniversityController.update)
 routes.post('/university', UniversityValidator.create(), UniversityController.create)
 routes.delete('/university', UniversityValidator.remove(), UniversityController.remove)
 
