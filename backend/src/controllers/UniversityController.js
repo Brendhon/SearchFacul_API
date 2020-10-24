@@ -1,5 +1,6 @@
 const crypto = require('crypto')
 const connection = require('../database/connection')
+const decrypt = require('../utils/decrypt')
 
 const create = async (request, response) => {
 
@@ -86,8 +87,11 @@ const listByName = async (request, response) => {
 const listCourses = async (request, response) => {
 
     // Pegando o Curso escolhido pelo usuário 
-    const { id } = request.body
+    let { id } = request.params
 
+    // Descriptografando o ID
+    id = decrypt(id)
+    
     // Pegando o Curso escolhido pelo usuário 
     const { page = 1 } = request.query
 
