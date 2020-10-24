@@ -25,6 +25,14 @@ const listByName = _ => celebrate({
     })
 })
 
+const listByID = _ => celebrate({
+
+    [Segments.PARAMS]: Joi.object().keys({
+        id: Joi.number().required()
+    })
+
+})
+
 const remove = _ => celebrate({
 
     [Segments.PARAMS]: Joi.object().keys({
@@ -37,4 +45,4 @@ const remove = _ => celebrate({
 
 })
 
-module.exports = { create, listByName, remove }
+module.exports = { create, listByName, listByID, remove }

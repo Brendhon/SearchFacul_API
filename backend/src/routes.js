@@ -26,7 +26,7 @@ routes.get('/profile', ProfileValidator.listCourses(), ProfileController.list)
 
 // Rotas pertencentes aos cursos
 routes.get('/course/name/:name', CourseValidator.listByName(), CourseController.listByName)
-routes.get('/course/:id', CourseController.listById)
+routes.get('/course/:id', CourseValidator.listByID(), CourseController.listById)
 routes.post('/course', CourseValidator.create(), CourseController.create)
 routes.delete('/course/:id', CourseValidator.remove(), CourseController.remove)
 
