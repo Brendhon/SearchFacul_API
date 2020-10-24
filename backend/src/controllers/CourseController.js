@@ -7,7 +7,7 @@ const create = async (request, response) => {
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const university_id = request.headers.authorization
-    
+
     // Verificando se faculdade foi encontrada
     await connection('university')
         .where('id', university_id)
@@ -121,4 +121,39 @@ const remove = async (request, response) => {
 
 }
 
-module.exports = { create, listByName, listById, remove }
+const update = async (request, response) => {
+
+    // Realizando um destruction no objeto vindo da requisição
+    const { name, email, description, score } = request.body
+
+    // Pegando o ID do curso que será atualizado
+    const { id } = request.params
+
+    // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
+    const universityId = request.headers.authorization
+
+    // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso
+    await connection('course')
+        .where('university_id', universityId)
+        .select('university_id')
+        .first()
+        .then(course => {
+            if (universityId != course.university_id) return response.status(401).json({ message: 'Operação não permitida' })
+        })
+        .catch(_ => response.status(500).json({ message: 'Falha no Sistema :(' }))
+
+    // Inserindo dados na tabela
+    await connection('course')
+        .where('id', id)
+        .update({
+            name,
+            email,
+            description,
+            score
+        })
+        .then(_ => response.status(204).send())
+        .catch(_ => response.status(500).json({ message: 'Falha ao criar' }))
+
+}
+
+module.exports = { create, listByName, listById, remove, update }
