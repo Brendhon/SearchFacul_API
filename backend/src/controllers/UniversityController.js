@@ -30,6 +30,42 @@ const create = async (request, response) => {
     }
 }
 
+const listByCity = async (request, response) => {
+
+    // Pegando o Curso escolhido pelo usuário 
+    const { city } = request.params
+
+    // Pegando o Curso escolhido pelo usuário 
+    const { page = 1 } = request.query
+
+    // Numero de elementos que serão retornados
+    const numElements = 5
+
+    try {
+
+        // Pegando o numero de cursos resultantes da busca
+        const [count] = await connection('university')
+            .where('city', 'like', `%${city}%`)
+            .count()
+
+        response.header('X-Total-Count', count['count(*)'])
+
+    } catch {
+        return response.status(400).json({ message: 'Cidade não encontrada :(' })
+    }
+
+    try {
+        const universities = await connection('university')
+            .limit(numElements)
+            .offset((page - 1) * numElements)
+            .where('city', 'like', `%${city}%`)
+
+        return response.json(universities)
+    } catch {
+        return response.status(400).json({ message: 'Falha ao buscar as universidades da cidade' })
+    }
+}
+
 const listByName = async (request, response) => {
 
     // Pegando o Curso escolhido pelo usuário 
@@ -101,4 +137,4 @@ const remove = async (request, response) => {
     }
 }
 
-module.exports = { create, listByName, remove }
+module.exports = { create, listByName, listByCity, remove }
