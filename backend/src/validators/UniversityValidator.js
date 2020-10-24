@@ -20,4 +20,15 @@ const remove = _ => celebrate({
 
 })
 
-module.exports = { create, remove }
+const list = _ => celebrate({
+
+    [Segments.PARAMS]: Joi.object().keys({
+        name: Joi.string().required()
+    }),
+
+    [Segments.QUERY]: Joi.object().keys({
+        page: Joi.number()
+    })
+})
+
+module.exports = { create, remove, list }
