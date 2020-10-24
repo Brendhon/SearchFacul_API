@@ -31,8 +31,35 @@ const create = async (request, response) => {
 }
 
 const list = async (request, response) => {
+
+    // Pegando o Curso escolhido pelo usuário 
+    const { name } = request.params
+
+    // Pegando o Curso escolhido pelo usuário 
+    const { page = 1 } = request.query
+
+    // Numero de elementos que serão retornados
+    const numElements = 5
+
     try {
-        const universities = await connection('university').select('*')
+
+        // Pegando o numero de cursos resultantes da busca
+        const [count] = await connection('university')
+            .where('universityName', 'like', `%${name}%`)
+            .count()
+
+        response.header('X-Total-Count', count['count(*)'])
+
+    } catch {
+        return response.status(400).json({ message: 'Universidade não encontrado :(' })
+    }
+
+    try {
+        const universities = await connection('university')
+            .limit(numElements)
+            .offset((page - 1) * numElements)
+            .where('universityName', 'like', `%${name}%`)
+
         return response.json(universities)
     } catch {
         return response.status(400).json({ message: 'Falha ao buscar as Universidades' })

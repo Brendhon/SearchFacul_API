@@ -17,7 +17,7 @@ const routes = express.Router()
 routes.post('/session', SessionValidator.create(), SessionController.create)
 
 // Rotas pertencentes a Universidades
-routes.get('/university', UniversityController.list)
+routes.get('/university/:name', UniversityController.list)
 routes.post('/university', UniversityValidator.create(), UniversityController.create)
 routes.delete('/university',UniversityValidator.remove(), UniversityController.remove)
 
