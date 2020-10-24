@@ -102,6 +102,46 @@ const listByName = async (request, response) => {
     }
 }
 
+const listCourses = async (request, response) => {
+
+    // Pegando o Curso escolhido pelo usuário 
+    const { id } = request.params
+
+    // Pegando o Curso escolhido pelo usuário 
+    const { page = 1 } = request.query
+
+    // Numero de elementos que serão retornados
+    const numElements = 5
+
+    try {
+
+        // Pegando o numero de cursos resultantes da busca
+        const [count] = await connection('course')
+            .where('university_id', id)
+            .count()
+
+        response.header('X-Total-Count', count['count(*)'])
+
+    } catch {
+        return response.status(400).json({ message: 'Universidade não encontrado :(' })
+    }
+
+    try {
+
+        // Buscando lista de cursos referente a uma faculdade especifica 
+        const courses = await connection('course')
+            .limit(numElements)
+            .offset((page - 1) * numElements)
+            .where('university_id', id)
+            .select('*')
+
+        return response.json(courses)
+
+    } catch {
+        return response.status(400).json({ message: 'Falha ao buscar as Universidades' })
+    }
+}
+
 const remove = async (request, response) => {
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
@@ -137,4 +177,4 @@ const remove = async (request, response) => {
     }
 }
 
-module.exports = { create, listByName, listByCity, remove }
+module.exports = { create, listByName, listByCity, listCourses, remove }

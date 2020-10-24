@@ -16,14 +16,15 @@ const routes = express.Router()
 // Rota para o Login (Sessão) da universidade
 routes.post('/session', SessionValidator.create(), SessionController.create)
 
+// Rotas pertencentes a um perfil da faculdade
+routes.get('/profile', ProfileValidator.listCourses(), ProfileController.list)
+
 // Rotas pertencentes a Universidades
-routes.get('/university/:name', UniversityValidator.listByName(), UniversityController.listByName)
+routes.get('/university/:id', UniversityController.listCourses)
+routes.get('/university/name/:name', UniversityValidator.listByName(), UniversityController.listByName)
 routes.get('/university/city/:city', UniversityValidator.listByCity() ,UniversityController.listByCity)
 routes.post('/university', UniversityValidator.create(), UniversityController.create)
 routes.delete('/university', UniversityValidator.remove(), UniversityController.remove)
-
-// Rotas pertencentes a um perfil da faculdade
-routes.get('/profile', ProfileValidator.listCourses(), ProfileController.list)
 
 // Rotas pertencentes aos cursos
 routes.get('/course/:id', CourseValidator.listByID(), CourseController.listById)
