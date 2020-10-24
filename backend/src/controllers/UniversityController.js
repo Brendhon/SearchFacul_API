@@ -1,4 +1,5 @@
 const crypto = require('crypto')
+const CryptoJS = require('crypto-js')
 const connection = require('../database/connection')
 
 const create = async (request, response) => {
@@ -105,8 +106,14 @@ const listByName = async (request, response) => {
 const listCourses = async (request, response) => {
 
     // Pegando o Curso escolhido pelo usuário 
-    const { id } = request.params
+    const { id } = request.body
 
+    // // Para criptografar 
+    // const encryptId = CryptoJS.AES.encrypt(id, "123").toString();
+    
+    // Descriptografando o ID
+    const decryptId = CryptoJS.AES.decrypt(id, "123").toString(CryptoJS.enc.Utf8)
+       
     // Pegando o Curso escolhido pelo usuário 
     const { page = 1 } = request.query
 
@@ -117,7 +124,7 @@ const listCourses = async (request, response) => {
 
         // Pegando o numero de cursos resultantes da busca
         const [count] = await connection('course')
-            .where('university_id', id)
+            .where('university_id', decryptId)
             .count()
 
         response.header('X-Total-Count', count['count(*)'])
@@ -132,7 +139,7 @@ const listCourses = async (request, response) => {
         const courses = await connection('course')
             .limit(numElements)
             .offset((page - 1) * numElements)
-            .where('university_id', id)
+            .where('university_id', decryptId)
             .select('*')
 
         return response.json(courses)

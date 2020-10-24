@@ -42,4 +42,11 @@ const listByCity = _ => celebrate({
     })
 })
 
-module.exports = { create, remove, listByName, listByCity }
+const listCourses = _ => celebrate({
+
+    [Segments.QUERY]: Joi.object().keys({
+        page: Joi.number()
+    })
+})
+
+module.exports = { create, remove, listByName, listCourses, listByCity }
