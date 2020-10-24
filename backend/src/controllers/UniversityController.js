@@ -166,7 +166,7 @@ const update = async (request, response) => {
             street,
             number
         })
-        .then(_ => response.json({ id }))
+        .then(_ => response.status(204).send())
         .catch(_ => response.status(400).json({ message: 'Falha ao criar' }))
 
 }
