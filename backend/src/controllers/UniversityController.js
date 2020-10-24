@@ -7,7 +7,7 @@ const create = async (request, response) => {
     const { universityName, telephone, uf, city, street, number } = request.body
 
     // Gerando um id aleatório de 2 bytes no formato string
-    const id = crypto.randomBytes(2).toString('HEX')
+    const id = crypto.randomBytes(4).toString('HEX')
 
     // Inserindo dados na tabela
     await connection('university')
