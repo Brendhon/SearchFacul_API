@@ -21,7 +21,7 @@ const list = _ => celebrate({
     }),
 
     [Segments.QUERY]: Joi.object().keys({
-        page: Joi.number().required()
+        page: Joi.number()
     })
 })
 
