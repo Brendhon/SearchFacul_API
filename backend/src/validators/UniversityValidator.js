@@ -20,7 +20,7 @@ const remove = _ => celebrate({
 
 })
 
-const list = _ => celebrate({
+const listByName = _ => celebrate({
 
     [Segments.PARAMS]: Joi.object().keys({
         name: Joi.string().required()
@@ -31,4 +31,4 @@ const list = _ => celebrate({
     })
 })
 
-module.exports = { create, remove, list }
+module.exports = { create, remove, listByName }

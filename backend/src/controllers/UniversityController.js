@@ -30,7 +30,7 @@ const create = async (request, response) => {
     }
 }
 
-const list = async (request, response) => {
+const listByName = async (request, response) => {
 
     // Pegando o Curso escolhido pelo usuário 
     const { name } = request.params
@@ -101,4 +101,4 @@ const remove = async (request, response) => {
     }
 }
 
-module.exports = { create, list, remove }
+module.exports = { create, listByName, remove }
