@@ -77,6 +77,34 @@ const listByName = async (request, response) => {
     }
 }
 
+const listById = async (request, response) => {
+
+    // Pegando o Curso escolhido pelo usuário 
+    const { id } = request.params
+   
+    try {
+        // Buscando lista de cursos
+        const courses = await connection('course')
+            .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
+            .where('course.id', id)
+            .select([
+                'course.*', //Selecionando todos os dados dos cursos 
+                'university.universityName',
+                'university.city',
+                'university.telephone',
+                'university.uf',
+                'university.street',
+                'university.number'
+            ])
+            .first() // Pegando o primeiro que ele encontrar
+
+        return response.json(courses)
+
+    } catch {
+        return response.status(400).json({ message: 'Curso não encontrado' })
+    }
+}
+
 const remove = async (request, response) => {
 
     // Pegando o ID escolhido pelo usuário 
@@ -116,4 +144,4 @@ const remove = async (request, response) => {
     }
 }
 
-module.exports = { create, listByName, remove }
+module.exports = { create, listByName, listById, remove }
