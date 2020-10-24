@@ -44,7 +44,7 @@ const listByCity = _ => celebrate({
 
 const listCourses = _ => celebrate({
 
-    [Segments.BODY]: Joi.object().keys({
+    [Segments.PARAMS]: Joi.object().keys({
         id: Joi.string().required()
     }),
 
