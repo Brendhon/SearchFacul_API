@@ -7,7 +7,7 @@ const create = async (request, response) => {
     // Realizando um destruction no objeto vindo da requisição
     const { universityName, telephone, uf, city, street, number } = request.body
 
-    // Gerando um id aleatório de 2 bytes no formato string
+    // Gerando um id aleatório de 4 bytes no formato string
     const id = crypto.randomBytes(4).toString('HEX')
 
     // Inserindo dados na tabela
