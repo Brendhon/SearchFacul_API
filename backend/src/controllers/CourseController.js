@@ -61,7 +61,8 @@ const listByName = async (request, response) => {
             'university.telephone',
             'university.uf',
             'university.street',
-            'university.number'
+            'university.number',
+            'university.site'
         ])
         .then(courses => {
             response.header('X-Total-Count', count['count(*)'])
@@ -87,7 +88,8 @@ const listById = async (request, response) => {
             'university.telephone',
             'university.uf',
             'university.street',
-            'university.number'
+            'university.number',
+            'university.site'
         ])
         .first() // Pegando o primeiro que ele encontrar
         .then(courses => response.json(courses))

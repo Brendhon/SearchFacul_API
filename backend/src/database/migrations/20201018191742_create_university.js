@@ -7,6 +7,7 @@ exports.up = function(knex) {
         table.string('city').notNullable();
         table.string('street').notNullable();
         table.decimal('number').notNullable();
+        table.string('site');
       })
 };
 

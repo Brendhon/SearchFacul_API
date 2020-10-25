@@ -5,7 +5,7 @@ const decrypt = require('../utils/decrypt')
 const create = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { universityName, telephone, uf, city, street, number } = request.body
+    const { universityName, telephone, uf, city, street, number, site } = request.body
 
     // Gerando um id aleatório de 4 bytes no formato string
     const id = crypto.randomBytes(4).toString('HEX')
@@ -19,7 +19,8 @@ const create = async (request, response) => {
             uf,
             city,
             street,
-            number
+            number,
+            site
         })
         .then(_ => response.json({ id }))
         .catch(_ => response.status(400).json({ message: 'Falha ao criar' }))
@@ -150,7 +151,7 @@ const remove = async (request, response) => {
 const update = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { universityName, telephone, uf, city, street, number } = request.body
+    const { universityName, telephone, uf, city, street, number, site } = request.body
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const id = request.headers.authorization
@@ -164,7 +165,8 @@ const update = async (request, response) => {
             uf,
             city,
             street,
-            number
+            number,
+            site
         })
         .then(_ => response.status(204).send())
         .catch(_ => response.status(400).json({ message: 'Falha ao criar' }))

@@ -8,7 +8,8 @@ const create = _ => celebrate({
         uf: Joi.string().trim().regex(/^[A-Z]{2,2}$/).required(), // Validando se o UF tem duas letras maiúsculas e epenas 2 letras
         city: Joi.string().required(),
         street: Joi.string().required(),
-        number: Joi.number().required()
+        number: Joi.number().required(),
+        site: Joi.string().uri()
     })
 })
 
@@ -61,7 +62,8 @@ const update = _ => celebrate({
         uf: Joi.string().trim().regex(/^[A-Z]{2,2}$/).required(), // Validando se o UF tem duas letras maiúsculas e epenas 2 letras
         city: Joi.string().required(),
         street: Joi.string().required(),
-        number: Joi.number().required()
+        number: Joi.number().required(),
+        site: Joi.string().uri()
     }),
 
     [Segments.HEADERS]: Joi.object({
