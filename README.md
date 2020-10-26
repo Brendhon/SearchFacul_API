@@ -7,6 +7,7 @@ As principais ferramentas utilizadas na construção do projeto:
  * [Knex.js](http://knexjs.org/)
  * [Celebrate](https://github.com/arb/celebrate)
  * [Jest](https://jestjs.io/)
+ * [SuperTest](https://github.com/visionmedia/supertest)
 
 ## Como usar?
 
