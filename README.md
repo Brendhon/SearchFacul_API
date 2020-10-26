@@ -6,6 +6,7 @@ As principais ferramentas utilizadas na construção do projeto:
  * [Express](https://expressjs.com/pt-br/)
  * [Knex.js](http://knexjs.org/)
  * [Celebrate](https://github.com/arb/celebrate)
+ * [Jest](https://jestjs.io/)
 
 ## Como usar?
 
