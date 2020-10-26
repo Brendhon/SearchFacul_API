@@ -1,6 +1,6 @@
-const crypto = require('crypto')
 const connection = require('../database/connection')
 const decrypt = require('../utils/decrypt')
+const generateUniqueId = require('../utils/generateUniqueId')
 
 const create = async (request, response) => {
 
@@ -8,7 +8,7 @@ const create = async (request, response) => {
     const { universityName, telephone, uf, city, street, number, site } = request.body
 
     // Gerando um id aleatório de 4 bytes no formato string
-    const id = crypto.randomBytes(4).toString('HEX')
+    const id = generateUniqueId()
 
     // Inserindo dados na tabela
     await connection('university')
