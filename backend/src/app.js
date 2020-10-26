@@ -14,4 +14,4 @@ app.use(routes) // Utilizando as rotas
 app.use(errors()) // Usando os erros do celebrate
 
 // Escolhendo a porta
-app.listen(3333)
+module.exports = app
