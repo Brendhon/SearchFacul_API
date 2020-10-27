@@ -13,5 +13,4 @@ app.use(express.json()) // Ativando a utilização de JSON
 app.use(routes) // Utilizando as rotas
 app.use(errors()) // Usando os erros do celebrate
 
-// Escolhendo a porta
 module.exports = app
