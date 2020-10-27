@@ -4,7 +4,8 @@ const connection = require('../../src/database/connection')
 
 describe("University", () => {
 
-    beforeAll(async () => {
+    beforeEach(async () => {
+        await connection.migrate.rollback() // Realiza um rollback para evitar que o banco cresça sem controle
         await connection.migrate.latest() // Executa os migrates antes de dos testes serem chamados
     })
 
