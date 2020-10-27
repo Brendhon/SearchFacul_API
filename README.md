@@ -3,7 +3,7 @@
 # SearchFacul
 
 ## 💻 Sobre o projeto
-Este projeto tem como objetivo colocar em prática os conhecimentos adquiridos na disciplina de **C214** (Engenharia de Software) durante a graduação em Engenharia de Computação pelo [Inatel](https://inatel.br/home/).
+Este projeto tem como objetivo colocar em prática os conhecimentos adquiridos na disciplina de **C214** (Engenharia de Software) durante a graduação em Engenharia de Computação pelo **[Inatel](https://inatel.br/home/)**
 
 ---
 
@@ -12,6 +12,7 @@ Este projeto tem como objetivo colocar em prática os conhecimentos adquiridos n
 As seguintes ferramentas foram utilizadas na construção do projeto:
 
  - **[Express](https://expressjs.com/pt-br/)**
+ - **[CORS](https://expressjs.com/en/resources/middleware/cors.html)**
  - **[Nodemon](https://nodemon.io/)**
  - **[SQLite](https://github.com/mapbox/node-sqlite3)**
  - **[Knex.js](http://knexjs.org/)**
@@ -54,6 +55,3 @@ $ npm start
 ---
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
-
----
-
