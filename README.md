@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/Brendhon/SearchFacul_API.svg?branch=main)](https://travis-ci.com/Brendhon/SearchFacul_API)
+
 # SearchFacul
 Este projeto tem como objetivo colocar em prática os conhecimentos adquiridos na disciplina de **C214** (Engenharia de Software) durante a graduação em Engenharia de Computação pelo [Inatel](https://inatel.br/home/).
 
@@ -8,6 +10,7 @@ As principais ferramentas utilizadas na construção do projeto:
  * [Celebrate](https://github.com/arb/celebrate)
  * [Jest](https://jestjs.io/)
  * [SuperTest](https://github.com/visionmedia/supertest)
+ * [Travis CI](https://travis-ci.org/)
 
 ## Como usar?
 
