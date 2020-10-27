@@ -52,14 +52,6 @@ $ npm start
 ```
 
 ---
-## 💪 Como contribuir para o projeto
-
-1. Faça um **fork** do projeto.
-2. Crie uma nova branch com as suas alterações.
-3. Salve as alterações e crie uma mensagem de commit contando o que você fez.
-4. Envie as suas alterações.
-> Caso tenha alguma dúvida confira este [guia de como contribuir no GitHub](./CONTRIBUTING.md)
----
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
 
