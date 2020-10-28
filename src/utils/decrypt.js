@@ -1,5 +1,5 @@
 const crypto = require('crypto')
-const { secret } = require('./Secret.json')
+const secret = "abcdefghijklmnopqrstuvwxyzabcef"
 
 const decrypt = encrypted => {
 
