@@ -125,13 +125,12 @@ const remove = async (request, response) => {
     const id = request.headers.authorization
 
     // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso (EVITAR QUE UMA UNIVERSIDADE EXCLUA A OUTRA)
-    await connection('university')
+    const university = await connection('university')
         .where('id', id)  // Comparando o ID escolhido com o do banco
         .first() // Pegando o primeiro que ele encontrar
-        .then(university => {
-            if (id != university.id) return response.status(401).json({ message: 'Operação não permitida' })
-        })
         .catch(_ => response.status(400).json({ message: 'Falha ao buscar' }))
+
+    if (id != university.id) return response.status(401).json({ message: 'Operação não permitida' })
 
     // Deletando os cursos relacionados a faculdade no banco
     await connection('course')

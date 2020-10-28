@@ -9,14 +9,12 @@ const create = async (request, response) => {
     const university_id = request.headers.authorization
 
     // Verificando se faculdade foi encontrada
-    await connection('university')
+    const university = await connection('university')
         .where('id', university_id)
         .first()
-        .then(university => {
-            if (!university) return response.status(400).json({ message: 'Universidade não encontrada :(' })
-        })
         .catch(_ => response.status(500).json({ message: 'Falha ao servidor' }))
 
+    if (!university) return response.status(400).json({ message: 'Universidade não encontrada :(' })
 
     // Realizando um destruction no array resultado da inserção para pegar o id gerado
     await connection('course')
@@ -109,14 +107,13 @@ const remove = async (request, response) => {
     const university_id = request.headers.authorization
 
     // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso (EVITAR QUE UMA UNIVERSIDADE EXCLUA O CURSO DE OUTRA)
-    await connection('course')
+    const universityId = await connection('course')
         .where('id', id)
         .select('university_id')
         .first()
-        .then(course => {
-            if (university_id != course.university_id) return response.status(401).json({ message: 'Operação não permitida' })
-        })
         .catch(_ => response.status(500).json({ message: 'Falha no Sistema' }))
+
+    if (university_id != universityId) return response.status(401).json({ message: 'Operação não permitida' })
 
     await connection('course')
         .where('id', id)  // Comparando o ID escolhido com o do banco
@@ -142,6 +139,7 @@ const update = async (request, response) => {
         .where('university_id', universityId)
         .select('university_id')
         .first()
+        .catch(_ => response.status(500).json({ message: 'Falha no Sistema' }))
 
     if (university_id != universityId) return response.status(401).json({ message: 'Operação não permitida' })
 
