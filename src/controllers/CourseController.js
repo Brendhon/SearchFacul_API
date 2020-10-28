@@ -135,13 +135,13 @@ const update = async (request, response) => {
     const universityId = request.headers.authorization
 
     // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso
-    const { university_id } = await connection('course')
+    const course = await connection('course')
         .where('university_id', universityId)
         .select('university_id')
         .first()
         .catch(_ => response.status(500).json({ message: 'Falha no Sistema' }))
 
-    if (university_id != universityId) return response.status(401).json({ message: 'Operação não permitida' })
+    if (!course || course.university_id != universityId) return response.status(401).json({ message: 'Operação não permitida' })
 
     // Inserindo dados na tabela
     await connection('course')
