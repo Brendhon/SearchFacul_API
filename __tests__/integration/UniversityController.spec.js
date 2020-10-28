@@ -17,17 +17,17 @@ describe("University", () => {
         const response = await request(app)
             .post('/university')
             .send({
-                universityName: "Inatel",
+                IES: "Inatel",
                 telephone: "34546789",
                 uf: "MG",
                 city: "Santa Rita",
-                street: "Sei não",
-                number: 70,
+                address: "Sei não",
+                category: "privada",
                 site: "https://inatel.br/home/"
             })
 
         expect(response.body).toHaveProperty('id')
-        expect(response.body.id).toHaveLength(8);
+        expect(response.body.id).toHaveLength(8)
     })
 
 })

@@ -3,7 +3,7 @@ const connection = require('../database/connection')
 const create = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { name, email, description, score } = request.body
+    const { name, email, description, duration, titration, modality, score } = request.body
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const university_id = request.headers.authorization
@@ -24,6 +24,9 @@ const create = async (request, response) => {
             name,
             email,
             description,
+            duration,
+            titration,
+            modality,
             score,
             university_id
         })
@@ -56,12 +59,12 @@ const listByName = async (request, response) => {
         .where('course.name', 'like', `%${name}%`)
         .select([
             'course.*', //Selecionando todos os dados dos cursos 
-            'university.universityName',
+            'university.IES',
             'university.city',
             'university.telephone',
             'university.uf',
-            'university.street',
-            'university.number',
+            'university.address',
+            'university.category',
             'university.site'
         ])
         .then(courses => {
@@ -83,12 +86,12 @@ const listById = async (request, response) => {
         .where('course.id', id)
         .select([
             'course.*', //Selecionando todos os dados dos cursos 
-            'university.universityName',
+            'university.IES',
             'university.city',
             'university.telephone',
             'university.uf',
-            'university.street',
-            'university.number',
+            'university.address',
+            'university.category',
             'university.site'
         ])
         .first() // Pegando o primeiro que ele encontrar
@@ -126,7 +129,7 @@ const remove = async (request, response) => {
 const update = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { name, email, description, score } = request.body
+    const { name, email, description, duration, titration, modality, score } = request.body
 
     // Pegando o ID do curso que será atualizado
     const { id } = request.params
@@ -135,14 +138,12 @@ const update = async (request, response) => {
     const universityId = request.headers.authorization
 
     // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso
-    await connection('course')
+    const university_id = await connection('course')
         .where('university_id', universityId)
         .select('university_id')
         .first()
-        .then(course => {
-            if (universityId != course.university_id) return response.status(401).json({ message: 'Operação não permitida' })
-        })
-        .catch(_ => response.status(500).json({ message: 'Falha no Sistema :(' }))
+
+    if (university_id != universityId) return response.status(401).json({ message: 'Operação não permitida' })
 
     // Inserindo dados na tabela
     await connection('course')
@@ -151,6 +152,9 @@ const update = async (request, response) => {
             name,
             email,
             description,
+            duration,
+            titration,
+            modality,
             score
         })
         .then(_ => response.status(204).send())

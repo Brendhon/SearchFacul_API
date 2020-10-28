@@ -10,6 +10,9 @@ const create = _ => celebrate({
         name: Joi.string().required(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
         email: Joi.string().required().email(), // Valida que tem que ser uma String, obrigatório e se tem formato de email
         description: Joi.string().required(), 
+        duration: Joi.string().required(), 
+        titration: Joi.string().required(), 
+        modality: Joi.string().required(), 
         score: Joi.number().required().min(1).max(5)
     })
 })
@@ -59,6 +62,9 @@ const update = _ => celebrate({
         name: Joi.string().required(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
         email: Joi.string().required().email(), // Valida que tem que ser uma String, obrigatório e se tem formato de email
         description: Joi.string().required(), 
+        duration: Joi.string().required(), 
+        titration: Joi.string().required(), 
+        modality: Joi.string().required(), 
         score: Joi.number().required().min(1).max(5)
     })
 })

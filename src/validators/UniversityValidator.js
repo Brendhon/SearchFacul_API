@@ -3,12 +3,12 @@ const { celebrate, Segments, Joi } = require('celebrate')
 const create = _ => celebrate({
 
     [Segments.BODY]: Joi.object().keys({
-        universityName: Joi.string().required(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
+        IES: Joi.string().required(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
         telephone: Joi.string().trim().regex(/^[0-9]{8,11}$/).required(), // Validando se são números com limite de caracteres de 8 a 11
         uf: Joi.string().trim().regex(/^[A-Z]{2,2}$/).required(), // Validando se o UF tem duas letras maiúsculas e epenas 2 letras
         city: Joi.string().required(),
-        street: Joi.string().required(),
-        number: Joi.number().required(),
+        address: Joi.string().required(),
+        category: Joi.string().required(),
         site: Joi.string().uri()
     })
 })
@@ -57,12 +57,12 @@ const listCourses = _ => celebrate({
 const update = _ => celebrate({
 
     [Segments.BODY]: Joi.object().keys({
-        universityName: Joi.string().required(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
+        IES: Joi.string().required(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
         telephone: Joi.string().trim().regex(/^[0-9]{8,11}$/).required(), // Validando se são números com limite de caracteres de 8 a 11
         uf: Joi.string().trim().regex(/^[A-Z]{2,2}$/).required(), // Validando se o UF tem duas letras maiúsculas e epenas 2 letras
         city: Joi.string().required(),
-        street: Joi.string().required(),
-        number: Joi.number().required(),
+        address: Joi.string().required(),
+        category: Joi.string().required(),
         site: Joi.string().uri()
     }),
 

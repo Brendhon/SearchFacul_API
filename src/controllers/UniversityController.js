@@ -5,7 +5,7 @@ const generateUniqueId = require('../utils/generateUniqueId')
 const create = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { universityName, telephone, uf, city, street, number, site } = request.body
+    const { IES, telephone, uf, city, address, category, site } = request.body
 
     // Gerando um id aleatório de 4 bytes no formato string
     const id = generateUniqueId()
@@ -14,12 +14,12 @@ const create = async (request, response) => {
     await connection('university')
         .insert({
             id,
-            universityName,
+            IES,
             telephone,
             uf,
             city,
-            street,
-            number,
+            address,
+            category,
             site
         })
         .then(_ => response.json({ id }))
@@ -69,14 +69,14 @@ const listByName = async (request, response) => {
 
     // Pegando o numero de cursos resultantes da busca
     const [count] = await connection('university')
-        .where('universityName', 'like', `%${name}%`)
+        .where('IES', 'like', `%${name}%`)
         .count()
         .catch(_ => response.status(400).json({ message: 'Falha ao Buscar' }))
 
     await connection('university')
         .limit(numElements)
         .offset((page - 1) * numElements)
-        .where('universityName', 'like', `%${name}%`)
+        .where('IES', 'like', `%${name}%`)
         .then(universities => {
             response.header('X-Total-Count', count['count(*)'])
             return response.json(universities)
@@ -151,7 +151,7 @@ const remove = async (request, response) => {
 const update = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { universityName, telephone, uf, city, street, number, site } = request.body
+    const { IES, telephone, uf, city, address, category, site } = request.body
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const id = request.headers.authorization
@@ -160,12 +160,12 @@ const update = async (request, response) => {
     await connection('university')
         .where('id', id)
         .update({
-            universityName,
+            IES,
             telephone,
             uf,
             city,
-            street,
-            number,
+            address,
+            category,
             site
         })
         .then(_ => response.status(204).send())
