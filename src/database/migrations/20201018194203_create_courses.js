@@ -7,7 +7,7 @@ exports.up = function(knex) {
         table.string('name').notNullable();
         table.string('email').notNullable();
         table.string('description').notNullable();
-        table.string('duration').notNullable();
+        table.decimal('duration').notNullable();
         table.string('titration').notNullable();
         table.string('modality').notNullable();
         table.decimal('score').notNullable();
