@@ -37,7 +37,7 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 **[Git](https://git-scm.com)** e **[Node.js](https://nodejs.org/en/)**. 
-Além disto é bom ter um editor para trabalhar com o código como **[VSCode](https://code.visualstudio.com/)**
+Além disto é necessário criar um segredo na pasta **[utils](https://github.com/Brendhon/SearchFacul_API/tree/main/src/utils)** para configurar a decriptografia.
 
 #### ⚽ Rodando o servidor
 
