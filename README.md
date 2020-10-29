@@ -50,7 +50,7 @@ $ git clone https://github.com/Brendhon/SearchFacul_API.git
 $ npm install
 
 ```
-#### ⚽ Rodando o servidor
+### ⚽ Rodando o servidor
 
 ```bash
 
@@ -61,7 +61,7 @@ $ npm run dev
 
 ```
 
-#### 🤖 Rodando os testes automatizados
+### 🤖 Rodando os testes automatizados
 
 ```bash
 
