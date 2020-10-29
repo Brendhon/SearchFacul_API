@@ -68,10 +68,7 @@ $ npm run dev
 # Execute os testes
 $ npm test
 
-# Execute o Coverage
-$ npm run coverage
-
-# Ao rodar o comando coverage será gerado um arquivo .html contendo os dados de cobertura dos testes
+# Ao rodar o comando será gerado uma pasta chamada "coverage" contendo uma página  demostrando de forma mais detalhada os dados dos testes
 
 ```
 
