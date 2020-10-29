@@ -39,15 +39,20 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 **[Git](https://git-scm.com)** e **[Node.js](https://nodejs.org/en/)**. 
 Além disto é bom ter um editor para trabalhar com o código como **[VSCode](https://code.visualstudio.com/)**
 
-#### ⚽ Rodando o servidor
-
 ```bash
 
 # Clone este repositório
 $ git clone https://github.com/Brendhon/SearchFacul_API.git
 
+# Acesse a pasta do projeto
+
 # Instale as dependências
 $ npm install
+
+```
+#### ⚽ Rodando o servidor
+
+```bash
 
 # Execute a aplicação em modo de desenvolvimento
 $ npm run dev
@@ -55,6 +60,21 @@ $ npm run dev
 # O servidor inciará na porta:3333 - acesse http://localhost:3333 
 
 ```
+
+#### 🤖 Rodando os testes automatizados
+
+```bash
+
+# Execute os testes
+$ npm test
+
+# Execute o Coverage
+$ npm run coverage
+
+# Ao rodar o comando coverage será gerado um arquivo .html contendo os dados de cobertura dos testes
+
+```
+
 
 ---
 
