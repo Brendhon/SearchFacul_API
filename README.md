@@ -68,7 +68,7 @@ $ npm run dev
 # Execute os testes
 $ npm test
 
-# Ao rodar o comando será gerado uma pasta chamada "coverage" contendo uma página  demostrando de forma mais detalhada os dados dos testes
+# Será gerada uma pasta (coverage) contendo uma página com os dados dos testes de forma mais detalhada
 
 ```
 
