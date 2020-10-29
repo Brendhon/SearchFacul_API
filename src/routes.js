@@ -21,7 +21,7 @@ routes.get('/profile', ProfileValidator.listCourses(), ProfileController.list)
 
 // Rotas pertencentes a Universidades
 routes.get('/university/:id', UniversityValidator.listCourses(), UniversityController.listCourses)
-routes.get('/university/name/:name', UniversityValidator.listByName(), UniversityController.listByName)
+routes.get('/university/ies/:name', UniversityValidator.listByName(), UniversityController.listByName)
 routes.get('/university/city/:city', UniversityValidator.listByCity(), UniversityController.listByCity)
 routes.put('/university', UniversityValidator.update(), UniversityController.update)
 routes.post('/university', UniversityValidator.create(), UniversityController.create)

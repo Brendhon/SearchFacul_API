@@ -21,10 +21,6 @@ const listByName = _ => celebrate({
 
     [Segments.PARAMS]: Joi.object().keys({
         name: Joi.string().required()
-    }),
-
-    [Segments.QUERY]: Joi.object().keys({
-        page: Joi.number()
     })
 })
 

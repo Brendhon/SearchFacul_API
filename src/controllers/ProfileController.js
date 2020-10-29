@@ -9,7 +9,6 @@ const list = async (request, response) => {
     // Buscando lista de cursos referente a uma faculdade especifica 
     await connection('course')
         .where('university_id', university_id)
-        .select('*')
         .then(courses => response.json(courses))
         .catch(_ => response.status(500).json({ message: 'Falha no sistema' }))
 }

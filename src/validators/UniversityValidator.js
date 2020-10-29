@@ -25,10 +25,6 @@ const listByName = _ => celebrate({
 
     [Segments.PARAMS]: Joi.object().keys({
         name: Joi.string().required()
-    }),
-
-    [Segments.QUERY]: Joi.object().keys({
-        page: Joi.number()
     })
 })
 
@@ -36,10 +32,6 @@ const listByCity = _ => celebrate({
 
     [Segments.PARAMS]: Joi.object().keys({
         city: Joi.string().required()
-    }),
-
-    [Segments.QUERY]: Joi.object().keys({
-        page: Joi.number()
     })
 })
 
@@ -47,10 +39,6 @@ const listCourses = _ => celebrate({
 
     [Segments.PARAMS]: Joi.object().keys({
         id: Joi.string().required()
-    }),
-
-    [Segments.QUERY]: Joi.object().keys({
-        page: Joi.number()
     })
 })
 

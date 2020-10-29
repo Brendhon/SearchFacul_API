@@ -37,23 +37,9 @@ const listByName = async (request, response) => {
     // Pegando o Curso escolhido pelo usuário 
     const { name } = request.params
 
-    // Pegando o Curso escolhido pelo usuário 
-    const { page = 1 } = request.query
-
-    // Numero de elementos que serão retornados
-    const numElements = 5
-
-    // Pegando o numero de cursos resultantes da busca
-    const [count] = await connection('course')
-        .where('name', 'like', `%${name}%`)
-        .count()
-        .catch(_ => response.status(500).json({ message: 'Erro no sistema' }))
-
     // Buscando lista de cursos
     await connection('course')
         .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
-        .limit(numElements)
-        .offset((page - 1) * numElements)
         .where('course.name', 'like', `%${name}%`)
         .select([
             'course.*', //Selecionando todos os dados dos cursos 
@@ -66,7 +52,7 @@ const listByName = async (request, response) => {
             'university.site'
         ])
         .then(courses => {
-            response.header('X-Total-Count', count['count(*)'])
+            response.header('X-Total-Count', courses.length)
             return response.json(courses)
         })
         .catch(_ => response.status(500).json({ message: 'Erro no sistema' }))

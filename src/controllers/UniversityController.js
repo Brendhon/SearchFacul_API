@@ -32,24 +32,10 @@ const listByCity = async (request, response) => {
     // Pegando o Curso escolhido pelo usuário 
     const { city } = request.params
 
-    // Pegando o Curso escolhido pelo usuário 
-    const { page = 1 } = request.query
-
-    // Numero de elementos que serão retornados
-    const numElements = 5
-
-    // Pegando o numero de cursos resultantes da busca
-    const [count] = await connection('university')
-        .where('city', 'like', `%${city}%`)
-        .count()
-        .catch(_ => response.status(400).json({ message: 'Cidade não encontrada :(' }))
-
     await connection('university')
-        .limit(numElements)
-        .offset((page - 1) * numElements)
         .where('city', 'like', `%${city}%`)
         .then(universities => {
-            response.header('X-Total-Count', count['count(*)'])
+            response.header('X-Total-Count', universities.length) // Pegando o numero de universidades resultantes da busca
             return response.json(universities)
         })
         .catch(_ => response.status(400).json({ message: 'Falha ao buscar as universidades da cidade' }))
@@ -61,24 +47,10 @@ const listByName = async (request, response) => {
     // Pegando o Curso escolhido pelo usuário 
     const { name } = request.params
 
-    // Pegando o Curso escolhido pelo usuário 
-    const { page = 1 } = request.query
-
-    // Numero de elementos que serão retornados
-    const numElements = 5
-
-    // Pegando o numero de cursos resultantes da busca
-    const [count] = await connection('university')
-        .where('IES', 'like', `%${name}%`)
-        .count()
-        .catch(_ => response.status(400).json({ message: 'Falha ao Buscar' }))
-
     await connection('university')
-        .limit(numElements)
-        .offset((page - 1) * numElements)
         .where('IES', 'like', `%${name}%`)
         .then(universities => {
-            response.header('X-Total-Count', count['count(*)'])
+            response.header('X-Total-Count', universities.length)
             return response.json(universities)
         })
         .catch(_ => response.status(400).json({ message: 'Falha ao buscar as Universidades' }))
@@ -93,26 +65,11 @@ const listCourses = async (request, response) => {
     // Descriptografando o ID
     id = decrypt(id)
 
-    // Pegando o Curso escolhido pelo usuário 
-    const { page = 1 } = request.query
-
-    // Numero de elementos que serão retornados
-    const numElements = 5
-
-    // Pegando o numero de cursos resultantes da busca
-    const [count] = await connection('course')
-        .where('university_id', id)
-        .count()
-        .catch(_ => response.status(400).json({ message: 'Universidade não encontrado :(' }))
-
     // Buscando lista de cursos referente a uma faculdade especifica 
     await connection('course')
-        .limit(numElements)
-        .offset((page - 1) * numElements)
         .where('university_id', id)
-        .select('*')
         .then(courses => {
-            response.header('X-Total-Count', count['count(*)'])
+            response.header('X-Total-Count', courses.length) // Passando o total de elementos
             return response.json(courses)
         })
         .catch(_ => response.status(400).json({ message: 'Falha ao buscar as Universidades' }))
@@ -127,7 +84,7 @@ const remove = async (request, response) => {
     // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso (EVITAR QUE UMA UNIVERSIDADE EXCLUA A OUTRA)
     const university = await connection('university')
         .where('id', id)  // Comparando o ID escolhido com o do banco
-        .select("id")
+        .select('id')
         .first() // Pegando o primeiro que ele encontrar
         .catch(_ => response.status(400).json({ message: 'Falha ao buscar' }))
 
