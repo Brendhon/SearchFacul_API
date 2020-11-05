@@ -2,7 +2,7 @@ const request = require('supertest')
 const app = require('../../../src/app')
 const connection = require('../../../src/database/connection')
 
-describe("University", () => {
+describe("Session", () => {
 
     let universityId
 
