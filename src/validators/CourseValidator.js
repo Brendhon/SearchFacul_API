@@ -58,7 +58,7 @@ const update = _ => celebrate({
         name: Joi.string(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
         email: Joi.string().email(), // Valida que tem que ser uma String, obrigatório e se tem formato de email
         description: Joi.string(), 
-        duration: Joi.number(), 
+        duration: Joi.string(), 
         titration: Joi.string(), 
         modality: Joi.string(), 
         score: Joi.number().min(1).max(5)
