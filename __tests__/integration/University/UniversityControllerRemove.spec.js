@@ -44,8 +44,18 @@ describe("University", () => {
 
         const response = await request(app)
             .delete('/university')
-
+            
         expect(response.body.statusCode).toBe(400)
+    })
+
+    
+    it("Shouldn't be able to remove a University with a different authorization", async () => {
+
+        const response = await request(app)
+            .delete('/university')
+            .set("Authorization", "12345678")
+
+        expect(response.status).toBe(401)
     })
 
 })
