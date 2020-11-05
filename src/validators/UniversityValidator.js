@@ -45,12 +45,12 @@ const listCourses = _ => celebrate({
 const update = _ => celebrate({
 
     [Segments.BODY]: Joi.object().keys({
-        IES: Joi.string().required(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
-        telephone: Joi.string().trim().regex(/^[0-9]{8,11}$/).required(), // Validando se são números com limite de caracteres de 8 a 11
-        uf: Joi.string().trim().regex(/^[A-Z]{2,2}$/).required(), // Validando se o UF tem duas letras maiúsculas e epenas 2 letras
-        city: Joi.string().required(),
-        address: Joi.string().required(),
-        category: Joi.string().required(),
+        IES: Joi.string(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
+        telephone: Joi.string().trim().regex(/^[0-9]{8,11}$/), // Validando se são números com limite de caracteres de 8 a 11
+        uf: Joi.string().trim().regex(/^[A-Z]{2,2}$/), // Validando se o UF tem duas letras maiúsculas e epenas 2 letras
+        city: Joi.string(),
+        address: Joi.string(),
+        category: Joi.string(),
         site: Joi.string().uri()
     }),
 
