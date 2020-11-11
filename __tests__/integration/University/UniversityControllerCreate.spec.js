@@ -214,5 +214,60 @@ describe("University", () => {
         expect(response.body.statusCode).toBe(400)
         expect(response.body.validation.body.keys).toEqual(["site"])
     })
+    
+    it("Shouldn't be able to create a new University without 'email'", async () => {
+        const response = await request(app)
+            .post('/university')
+            .send({
+                IES: "Inatel",
+                telephone: "34546789",
+                password: "123",
+                uf: "MG",
+                city: "Santa Rita",
+                address: "Sei não",
+                category: "privada",
+                site: "inatel.br/home/"
+            })
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["email"])
+    })
+
+    it("Shouldn't be able to create a new University with incorrect 'email'", async () => {
+        const response = await request(app)
+            .post('/university')
+            .send({
+                IES: "Inatel",
+                telephone: "34546789",
+                email: "guilherme",
+                password: "123",
+                uf: "MG",
+                city: "Santa Rita",
+                address: "Sei não",
+                category: "privada",
+                site: "inatel.br/home/"
+            })
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["email"])
+    })
+
+    it("Shouldn't be able to create a new University without 'password'", async () => {
+        const response = await request(app)
+            .post('/university')
+            .send({
+                IES: "Inatel",
+                telephone: "34546789",
+                email: "guilherme@gmail.br",
+                uf: "MG",
+                city: "Santa Rita",
+                address: "Sei não",
+                category: "privada",
+                site: "inatel.br/home/"
+            })
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["password"])
+    })
 
 })
