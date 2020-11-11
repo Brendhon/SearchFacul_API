@@ -1,6 +1,8 @@
 exports.up = function(knex) {
     return knex.schema.createTable('university', function (table) {
         table.string('id').primary();
+        table.string('email').notNullable();
+        table.string('password').notNullable();
         table.string('IES').notNullable();
         table.string('telephone').notNullable();
         table.string('uf', 2).notNullable();

@@ -18,6 +18,8 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Santa Rita",
                 address: "Sei não",
@@ -58,15 +60,12 @@ describe("University", () => {
             .set("Authorization", universityId)
             .send({
                 name: "Engenharia de computação",
-                email: "guilherme@gmail.br",
                 description: "Melhor Curso",
                 duration: "5 anos",
                 titration: "Bacharelado",
                 modality: "Presencial",
                 score: 4
             })
-
-        universityId = encrypt(universityId)
 
         const response = await request(app)
             .get(`/university/${universityId}`)

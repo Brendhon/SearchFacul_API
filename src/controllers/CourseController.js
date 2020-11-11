@@ -3,7 +3,7 @@ const connection = require('../database/connection')
 const create = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { name, email, description, duration, titration, modality, score } = request.body
+    const { name, description, duration, titration, modality, score } = request.body
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const university_id = request.headers.authorization
@@ -20,7 +20,6 @@ const create = async (request, response) => {
     await connection('course')
         .insert({
             name,
-            email,
             description,
             duration,
             titration,
@@ -44,6 +43,7 @@ const listByName = async (request, response) => {
         .select([
             'course.*', //Selecionando todos os dados dos cursos 
             'university.IES',
+            'university.email',
             'university.city',
             'university.telephone',
             'university.uf',
@@ -71,6 +71,7 @@ const listById = async (request, response) => {
         .select([
             'course.*', //Selecionando todos os dados dos cursos 
             'university.IES',
+            'university.email',
             'university.city',
             'university.telephone',
             'university.uf',
@@ -112,7 +113,7 @@ const remove = async (request, response) => {
 const update = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { name, email, description, duration, titration, modality, score } = request.body
+    const { name, description, duration, titration, modality, score } = request.body
 
     // Pegando o ID do curso que será atualizado
     const { id } = request.params
@@ -134,7 +135,6 @@ const update = async (request, response) => {
         .where('id', id)
         .update({
             name,
-            email,
             description,
             duration,
             titration,

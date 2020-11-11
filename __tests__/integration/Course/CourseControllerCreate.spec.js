@@ -15,6 +15,8 @@ describe("Course", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Santa Rita",
                 address: "Sei não",
@@ -36,7 +38,6 @@ describe("Course", () => {
             .set("Authorization", universityId)
             .send({
                 name: "Engenharia de computação",
-                email: "guilherme@gmail.br",
                 description: "Melhor Curso",
                 duration: "5 anos",
                 titration: "Bacharelado",
@@ -52,7 +53,6 @@ describe("Course", () => {
             .post('/course')
             .send({
                 name: "Engenharia de computação",
-                email: "guilherme@gmail.br",
                 description: "Melhor Curso",
                 duration: "5 anos",
                 titration: "Bacharelado",
@@ -69,7 +69,6 @@ describe("Course", () => {
             .set("Authorization", '12345678')
             .send({
                 name: "Engenharia de computação",
-                email: "guilherme@gmail.br",
                 description: "Melhor Curso",
                 duration: "5 anos",
                 titration: "Bacharelado",
@@ -85,7 +84,6 @@ describe("Course", () => {
             .post('/course')
             .set("Authorization", universityId)
             .send({
-                email: "guilherme@gmail.br",
                 description: "Melhor Curso",
                 duration: "5 anos",
                 titration: "Bacharelado",
@@ -97,30 +95,12 @@ describe("Course", () => {
         expect(response.body.validation.body.keys).toEqual(["name"])
     })
 
-    it("Shouldn't be able to create a new Course without email", async () => {
-        const response = await request(app)
-            .post('/course')
-            .set("Authorization", universityId)
-            .send({
-                name: "Engenharia de computação",
-                description: "Melhor Curso",
-                duration: "5 anos",
-                titration: "Bacharelado",
-                modality: "Presencial",
-                score: 4
-            })
-
-        expect(response.body.statusCode).toBe(400)
-        expect(response.body.validation.body.keys).toEqual(["email"])
-    })
-
     it("Shouldn't be able to create a new Course without description", async () => {
         const response = await request(app)
             .post('/course')
             .set("Authorization", universityId)
             .send({
                 name: "Engenharia de computação",
-                email: "guilherme@gmail.br",
                 duration: "5 anos",
                 titration: "Bacharelado",
                 modality: "Presencial",
@@ -137,7 +117,6 @@ describe("Course", () => {
             .set("Authorization", universityId)
             .send({
                 name: "Engenharia de computação",
-                email: "guilherme@gmail.br",
                 description: "Melhor Curso",
                 titration: "Bacharelado",
                 modality: "Presencial",
@@ -154,7 +133,6 @@ describe("Course", () => {
             .set("Authorization", universityId)
             .send({
                 name: "Engenharia de computação",
-                email: "guilherme@gmail.br",
                 description: "Melhor Curso",
                 duration: "5 anos",
                 modality: "Presencial",
@@ -171,7 +149,6 @@ describe("Course", () => {
             .set("Authorization", universityId)
             .send({
                 name: "Engenharia de computação",
-                email: "guilherme@gmail.br",
                 description: "Melhor Curso",
                 duration: "5 anos",
                 titration: "Bacharelado",
@@ -188,7 +165,6 @@ describe("Course", () => {
             .set("Authorization", universityId)
             .send({
                 name: "Engenharia de computação",
-                email: "guilherme@gmail.br",
                 description: "Melhor Curso",
                 duration: "5 anos",
                 titration: "Bacharelado",
@@ -204,7 +180,6 @@ describe("Course", () => {
             .set("Authorization", universityId)
             .send({
                 name: "Engenharia de computação",
-                email: "guilherme@gmail.br",
                 description: "Melhor Curso",
                 duration: "5 anos",
                 titration: "Bacharelado",
@@ -214,23 +189,5 @@ describe("Course", () => {
 
         expect(response.body.statusCode).toBe(400)
         expect(response.body.validation.body.keys).toEqual(["score"])
-    })
-
-    it("Shouldn't be able to create a new Course with incorrect email", async () => {
-        const response = await request(app)
-            .post('/course')
-            .set("Authorization", universityId)
-            .send({
-                name: "Engenharia de computação",
-                email: "guilherme",
-                description: "Melhor Curso",
-                duration: "5 anos",
-                titration: "Bacharelado",
-                modality: "Presencial",
-                score: 5
-            })
-
-        expect(response.body.statusCode).toBe(400)
-        expect(response.body.validation.body.keys).toEqual(["email"])
     })
 })

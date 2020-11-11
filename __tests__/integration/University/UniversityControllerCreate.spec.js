@@ -19,6 +19,8 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Santa Rita",
                 address: "Sei não",
@@ -35,6 +37,8 @@ describe("University", () => {
             .post('/university')
             .send({
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Santa Rita",
                 address: "Sei não",
@@ -52,6 +56,8 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 uf: "MG",
+                email: "guilherme@gmail.br",
+                password: "123",
                 city: "Santa Rita",
                 address: "Sei não",
                 category: "privada",
@@ -68,6 +74,8 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 city: "Santa Rita",
                 address: "Sei não",
                 category: "privada",
@@ -84,6 +92,8 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 address: "Sei não",
                 category: "privada",
@@ -100,6 +110,8 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Santa Rita",
                 category: "privada",
@@ -116,6 +128,8 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Santa Rita",
                 address: "Sei não",
@@ -132,6 +146,8 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Santa Rita",
                 address: "Sei não",
@@ -148,6 +164,8 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MGA",
                 city: "Santa Rita",
                 address: "Sei não",
@@ -165,6 +183,8 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789a",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Santa Rita",
                 address: "Sei não",
@@ -182,6 +202,8 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Santa Rita",
                 address: "Sei não",

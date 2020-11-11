@@ -17,6 +17,8 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Santa Rita",
                 address: "Sei não",
@@ -39,6 +41,8 @@ describe("University", () => {
             .send({
                 IES: "Unifei",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Itajubá",
                 address: "Sei não",
@@ -57,6 +61,8 @@ describe("University", () => {
             .send({
                 IES: "Unifei",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Itajubá",
                 address: "Sei não",
@@ -75,6 +81,8 @@ describe("University", () => {
             .send({
                 IES: "Unifei",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Itajubá",
                 address: "Sei não",

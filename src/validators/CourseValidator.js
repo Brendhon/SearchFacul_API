@@ -8,7 +8,6 @@ const create = _ => celebrate({
 
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
-        email: Joi.string().required().email(), // Valida que tem que ser uma String, obrigatório e se tem formato de email
         description: Joi.string().required(), 
         duration: Joi.string().required(), 
         titration: Joi.string().required(), 
@@ -56,7 +55,6 @@ const update = _ => celebrate({
 
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
-        email: Joi.string().email(), // Valida que tem que ser uma String, obrigatório e se tem formato de email
         description: Joi.string(), 
         duration: Joi.string(), 
         titration: Joi.string(), 

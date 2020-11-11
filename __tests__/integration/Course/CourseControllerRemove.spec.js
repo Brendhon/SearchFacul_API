@@ -15,6 +15,8 @@ describe("Course", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
+                email: "guilherme@gmail.br",
+                password: "123",
                 uf: "MG",
                 city: "Santa Rita",
                 address: "Sei não",
@@ -30,7 +32,6 @@ describe("Course", () => {
             .set("Authorization", universityId)
             .send({
                 name: "Engenharia de computação",
-                email: "guilherme@gmail.br",
                 description: "Melhor Curso",
                 duration: "5 anos",
                 titration: "Bacharelado",

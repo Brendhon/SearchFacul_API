@@ -5,7 +5,7 @@ const generateUniqueId = require('../utils/generateUniqueId')
 const create = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { IES, telephone, uf, city, address, category, site } = request.body
+    const { IES, telephone, uf, city, email, password, address, category, site } = request.body
 
     // Gerando um id aleatório de 4 bytes no formato string
     const id = generateUniqueId()
@@ -16,6 +16,8 @@ const create = async (request, response) => {
             id,
             IES,
             telephone,
+            email,
+            password,
             uf,
             city,
             address,
@@ -34,6 +36,17 @@ const listByCity = async (request, response) => {
 
     await connection('university')
         .where('city', 'like', `%${city}%`)
+        .select([
+            'university.id',
+            'university.IES',
+            'university.email',
+            'university.city',
+            'university.telephone',
+            'university.uf',
+            'university.address',
+            'university.category',
+            'university.site'
+        ])
         .then(universities => {
             response.header('X-Total-Count', universities.length) // Pegando o numero de universidades resultantes da busca
             return response.json(universities)
@@ -49,6 +62,17 @@ const listByName = async (request, response) => {
 
     await connection('university')
         .where('IES', 'like', `%${name}%`)
+        .select([
+            'university.id',
+            'university.IES',
+            'university.email',
+            'university.city',
+            'university.telephone',
+            'university.uf',
+            'university.address',
+            'university.category',
+            'university.site'
+        ])
         .then(universities => {
             response.header('X-Total-Count', universities.length)
             return response.json(universities)
@@ -60,10 +84,7 @@ const listByName = async (request, response) => {
 const listCourses = async (request, response) => {
 
     // Pegando o Curso escolhido pelo usuário 
-    let { id } = request.params
-
-    // Descriptografando o ID
-    id = decrypt(id)
+    const { id } = request.params
 
     // Buscando lista de cursos referente a uma faculdade especifica 
     await connection('course')
@@ -108,7 +129,7 @@ const remove = async (request, response) => {
 const update = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { IES, telephone, uf, city, address, category, site } = request.body
+    const { IES, telephone, uf, city, address, email, password, category, site } = request.body
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const id = request.headers.authorization
@@ -128,6 +149,8 @@ const update = async (request, response) => {
         .update({
             IES,
             telephone,
+            email,
+            password,
             uf,
             city,
             address,

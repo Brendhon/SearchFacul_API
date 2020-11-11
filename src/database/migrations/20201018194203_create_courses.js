@@ -5,7 +5,6 @@ exports.up = function(knex) {
         table.increments();
 
         table.string('name').notNullable();
-        table.string('email').notNullable();
         table.string('description').notNullable();
         table.decimal('duration').notNullable();
         table.string('titration').notNullable();

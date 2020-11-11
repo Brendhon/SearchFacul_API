@@ -16,6 +16,8 @@ describe("Course", () => {
                 IES: "Inatel",
                 telephone: "34546789",
                 uf: "MG",
+                email: "guilherme@gmail.br",
+                password: "123",
                 city: "Santa Rita",
                 address: "Sei não",
                 category: "privada",
@@ -30,7 +32,6 @@ describe("Course", () => {
             .set("Authorization", universityId)
             .send({
                 name: "Engenharia de computação",
-                email: "guilherme@gmail.br",
                 description: "Melhor Curso",
                 duration: "5 anos",
                 titration: "Bacharelado",
@@ -50,7 +51,6 @@ describe("Course", () => {
             .set("Authorization", universityId)
             .send({
                 name: "Engenharia de Produção",
-                email: "marcos@gmail.br",
                 description: "ADM com CREA",
                 duration: "5 anos",
                 titration: "Bacharelado",
@@ -66,7 +66,6 @@ describe("Course", () => {
             .put('/course/1')
             .send({
                 name: "Engenharia de Produção",
-                email: "marcos@gmail.br",
                 description: "ADM com CREA",
                 duration: "5 anos",
                 titration: "Bacharelado",
@@ -83,7 +82,6 @@ describe("Course", () => {
             .set("Authorization", '12345678')
             .send({
                 name: "Engenharia de Produção",
-                email: "marcos@gmail.br",
                 description: "ADM com CREA",
                 duration: "5 anos",
                 titration: "Bacharelado",
