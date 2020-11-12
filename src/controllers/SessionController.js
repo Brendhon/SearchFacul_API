@@ -11,7 +11,7 @@ const create = async (request, response) => {
         .first()
         .then(async university => {
 
-            if (!university) return response.status(400).json({ message: 'Universidade não encontrada' }) // Verificando se Universidade foi encontrada
+            if (!university) return response.status(400).json({ message: 'Email não cadastrado' }) // Verificando se Universidade foi encontrada
 
             const samePassword = await comparePassword(password, university.password)
 
