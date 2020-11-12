@@ -25,6 +25,7 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
  - **[Cross-env](https://github.com/kentcdodds/cross-env)**
  - **[SuperTest](https://github.com/visionmedia/supertest)**
  - **[Travis CI](https://travis-ci.com/)**
+ - **[Bcrypt](https://github.com/kelektiv/node.bcrypt.js/)**
 > Veja o arquivo  **[package.json](https://github.com/Brendhon/SearchFacul_API/blob/main/package.json)**
 
 ### Utilitários
