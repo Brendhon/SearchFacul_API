@@ -24,7 +24,7 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
  - **[Jest](https://jestjs.io/)**
  - **[Cross-env](https://github.com/kentcdodds/cross-env)**
  - **[SuperTest](https://github.com/visionmedia/supertest)**
- - **[Travis CI](https://travis-ci.org/)**
+ - **[Travis CI](https://travis-ci.com/)**
 > Veja o arquivo  **[package.json](https://github.com/Brendhon/SearchFacul_API/blob/main/package.json)**
 
 ### Utilitários
