@@ -1,3 +1,5 @@
+require('dotenv').config() // Utilizando as variáveis de ambiente do arquivo .env
+
 const express = require('express') // Importando o modulo express
 const cors = require('cors')
 const { errors } = require('celebrate')
