@@ -1,4 +1,5 @@
 const connection = require('../database/connection')
+const { encryptPassword } = require('../utils/auth')
 const decrypt = require('../utils/decrypt')
 const generateUniqueId = require('../utils/generateUniqueId')
 
@@ -10,6 +11,8 @@ const create = async (request, response) => {
     // Gerando um id aleatório de 4 bytes no formato string
     const id = generateUniqueId()
 
+    const hash = await encryptPassword(password)
+
     // Inserindo dados na tabela
     await connection('university')
         .insert({
@@ -17,7 +20,7 @@ const create = async (request, response) => {
             IES,
             telephone,
             email,
-            password,
+            password: hash, // Salvando o hash da senha
             uf,
             city,
             address,
@@ -37,7 +40,7 @@ const listByCity = async (request, response) => {
     await connection('university')
         .where('city', 'like', `%${city}%`)
         .select([
-            'university.id',
+            'university.*',
             'university.IES',
             'university.email',
             'university.city',
@@ -129,7 +132,7 @@ const remove = async (request, response) => {
 const update = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { IES, telephone, uf, city, address, email, password, category, site } = request.body
+    let { IES, telephone, uf, city, address, email, password, category, site } = request.body
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const id = request.headers.authorization
@@ -142,6 +145,8 @@ const update = async (request, response) => {
         .catch(_ => response.status(400).json({ message: 'Falha ao buscar' }))
 
     if (!university || id != university.id) return response.status(401).json({ message: 'Operação não permitida' })
+
+    if (password) password = encryptPassword(password)
 
     // Inserindo dados na tabela
     await connection('university')
