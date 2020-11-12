@@ -42,8 +42,7 @@ describe("Session", () => {
                 password: "123"
             })
 
-        expect(response.body.id).toBeTruthy()
-        expect(response.body.city).toBe('Santa Rita')
+        expect(response.body.token).toBeTruthy()
     })
 
     it("Shouldn't be able to create a new session without email", async () => {

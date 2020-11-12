@@ -1,5 +1,5 @@
 const connection = require('../database/connection')
-const { comparePassword } = require('../utils/auth')
+const { comparePassword, encodeJwt } = require('../utils/auth')
 
 const create = async (request, response) => {
 
@@ -15,7 +15,10 @@ const create = async (request, response) => {
 
             const samePassword = await comparePassword(password, university.password)
 
-            if (samePassword) return response.json(university) // Retornando o objeto como resposta 
+            if (samePassword) return response.json({
+                token: encodeJwt(university.id)
+            }) // Retornando o token como resposta 
+            
             else return response.status(400).json({ message: 'Senha incorreta' }) // Verificando se Universidade foi encontrada
 
         })
