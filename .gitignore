@@ -135,4 +135,4 @@ sketch
 
 # End of https://www.toptal.com/developers/gitignore/api/vscode,node,react
 
-src/utils/Secret.json
+.env
