@@ -19,7 +19,7 @@ describe("University", () => {
             .send({
                 IES: "Inatel",
                 telephone: "34546789",
-                email: "guilherme@gmail.br",
+                email: "guilherme@gmail.com.br",
                 password: "123",
                 uf: "MG",
                 city: "Santa Rita",
