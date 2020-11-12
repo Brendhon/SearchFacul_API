@@ -23,6 +23,8 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
  - **[Celebrate](https://github.com/arb/celebrate)**
  - **[Jest](https://jestjs.io/)**
  - **[Cross-env](https://github.com/kentcdodds/cross-env)**
+ - **[Jwt-Simple](https://github.com/hokaccha/node-jwt-simple)**
+ - **[Dotenv](https://github.com/motdotla/dotenv)**
  - **[SuperTest](https://github.com/visionmedia/supertest)**
  - **[Travis CI](https://travis-ci.com/)**
  - **[Bcrypt](https://github.com/kelektiv/node.bcrypt.js/)**
@@ -37,8 +39,13 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
 #### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-**[Git](https://git-scm.com)** e **[Node.js](https://nodejs.org/en/)**. 
-Além disto é bom ter um editor para trabalhar com o código como **[VSCode](https://code.visualstudio.com/)**
+**[Git](https://git-scm.com)** e **[Node.js](https://nodejs.org/en/)**.<br> 
+Além disto é necessário:
+* Um editor para trabalhar com o código como **[VSCode](https://code.visualstudio.com/)**
+* Criar um arquivo (.env) na raiz do projeto e adicione a seguinte variável:
+    ```
+    AUTH_SECRET=<SECRET>
+    ```
 
 ```bash
 
