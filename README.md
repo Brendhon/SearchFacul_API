@@ -42,7 +42,7 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 **[Git](https://git-scm.com)** e **[Node.js](https://nodejs.org/en/)**.<br> 
 Além disto é necessário:
 * Um editor para trabalhar com o código como **[VSCode](https://code.visualstudio.com/)**
-* Caso queira poderá criar um arquivo (.env) na raiz do projeto para que possa utilizar um segredo de sua escolha para isso adicione a seguinte variável neste arquivo:
+* (Opcional) Crie um arquivo (.env) na raiz do projeto para que possa utilizar um segredo de sua escolha, o arquivo deve conter a seguinte variável:
     ```
     AUTH_SECRET=<SECRET>
     ```
