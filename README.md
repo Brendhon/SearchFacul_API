@@ -40,13 +40,13 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 **[Git](https://git-scm.com)** e **[Node.js](https://nodejs.org/en/)**.<br> 
-Além disto é necessário:
+Recomendações:
 * Um editor para trabalhar com o código como **[VSCode](https://code.visualstudio.com/)**
 * (Opcional) Crie um arquivo (.env) na raiz do projeto para que possa utilizar um segredo de sua escolha, o arquivo deve conter a seguinte variável:
     ```
     AUTH_SECRET=<SECRET>
     ```
-
+    
 ```bash
 
 # Clone este repositório
