@@ -38,29 +38,45 @@ describe("Session", () => {
         const response = await request(app)
             .post('/session')
             .send({
-                id: universityId
+                email: "guilherme@gmail.br",
+                password: "123"
             })
 
         expect(response.body.id).toBeTruthy()
         expect(response.body.city).toBe('Santa Rita')
     })
 
-    it("Shouldn't be able to create a new session without id", async () => {
-
-        const response = await request(app)
-            .post('/session')
-            .send({})
-
-        expect(response.body.statusCode).toBe(400)
-        expect(response.body.validation.body.keys).toEqual(["id"])
-    })
-
-    it("Shouldn't be able to create a new session with a nonexistent id", async () => {
+    it("Shouldn't be able to create a new session without email", async () => {
 
         const response = await request(app)
             .post('/session')
             .send({
-                id: '12345678'
+                password: "123"
+            })
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["email"])
+    })
+
+    it("Shouldn't be able to create a new session with a without password", async () => {
+
+        const response = await request(app)
+            .post('/session')
+            .send({
+                email: "guilherme@gmail.br",
+            })
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["password"])
+    })
+
+    it("Shouldn't be able to create a new session with incorrect password", async () => {
+
+        const response = await request(app)
+            .post('/session')
+            .send({
+                email: "guilherme@gmail.br",
+                password: "456"
             })
 
         expect(response.status).toBe(400)

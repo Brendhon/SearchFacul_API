@@ -3,7 +3,8 @@ const { celebrate, Segments, Joi } = require('celebrate')
 const create = _ => celebrate({
 
     [Segments.BODY]: Joi.object().keys({
-        id: Joi.string().required()
+        email: Joi.string().required().email(),
+        password: Joi.string().required()
     })
 })
 
