@@ -1,22 +1,17 @@
 const connection = require('../database/connection')
 const { encryptPassword } = require('../utils/auth')
-const decrypt = require('../utils/decrypt')
-const generateUniqueId = require('../utils/generateUniqueId')
 
 const create = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
     const { IES, telephone, uf, city, email, password, address, category, site } = request.body
 
-    // Gerando um id aleatório de 4 bytes no formato string
-    const id = generateUniqueId()
-
+    // Criando um Hash da senha para ser salvo no Banco
     const hash = await encryptPassword(password)
 
     // Inserindo dados na tabela
     await connection('university')
         .insert({
-            id,
             IES,
             telephone,
             email,
@@ -27,7 +22,7 @@ const create = async (request, response) => {
             category,
             site
         })
-        .then(_ => response.json({ id }))
+        .then(([id]) => response.json({ id })) // Retornando o ID como resposta 
         .catch(_ => response.status(400).json({ message: 'Falha ao criar' }))
 
 }
