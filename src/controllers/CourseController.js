@@ -6,11 +6,11 @@ const create = async (request, response) => {
     const { name, description, duration, titration, modality, score } = request.body
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
-    const university_id = request.headers.authorization
+    const auth = request
 
     // Verificando se faculdade foi encontrada
     const university = await connection('university')
-        .where('id', university_id)
+        .where('id', auth.id)
         .first()
         .catch(_ => response.status(500).json({ message: 'Falha ao servidor' }))
 
@@ -25,7 +25,7 @@ const create = async (request, response) => {
             titration,
             modality,
             score,
-            university_id
+            university_id: auth.id
         })
         .then(([id]) => response.json({ id })) // Retornando o ID como resposta 
         .catch(_ => response.status(500).json({ message: 'Falha ao criar' }))

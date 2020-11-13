@@ -4,13 +4,15 @@ const connection = require('../../../src/database/connection')
 
 describe("Course", () => {
 
+    let universityId
+
     beforeAll(async () => {
 
         await connection.migrate.rollback() // Realiza um rollback para evitar que o banco cresça sem controle
         await connection.migrate.latest() // Executa os migrates antes de dos testes serem chamados
 
         // Inserindo um dado no banco como teste
-        universityId = await request(app)
+        await request(app)
             .post('/university')
             .send({
                 IES: "Inatel",
@@ -24,7 +26,14 @@ describe("Course", () => {
                 site: "https://inatel.br/home/"
             })
 
-        universityId = universityId.body.id // Pegando o ID resultante da resposta
+        const response = await request(app)
+            .post('/session')
+            .send({
+                email: "guilherme@gmail.br",
+                password: "123"
+            })
+
+        universityId = response.body.token // Pegando o ID resultante da resposta
 
     })
 
