@@ -35,6 +35,6 @@ routes.get('/course/:id', CourseValidator.listByID(), CourseController.listById)
 routes.get('/course/name/:name', CourseValidator.listByName(), CourseController.listByName)
 routes.post('/course', CourseValidator.create(), authorization.required, CourseController.create)
 routes.delete('/course/:id', CourseValidator.remove(), authorization.required, CourseController.remove)
-routes.put('/course/:id', CourseValidator.update(), CourseController.update)
+routes.put('/course/:id', CourseValidator.update(), authorization.required, CourseController.update)
 
 module.exports = routes
