@@ -3,7 +3,7 @@ const { celebrate, Segments, Joi } = require('celebrate')
 const create = _ => celebrate({
 
     [Segments.HEADERS]: Joi.object({
-        authorization: Joi.string().required().length(95),
+        authorization: Joi.string().required(),
     }).unknown(), //Como vários parâmetros são enviados pelo header o "unknown()" serve para descartar os que não foram validados
 
     [Segments.BODY]: Joi.object().keys({
@@ -38,7 +38,7 @@ const remove = _ => celebrate({
     }),
 
     [Segments.HEADERS]: Joi.object({
-        authorization: Joi.string().required().length(95),
+        authorization: Joi.string().required(),
     }).unknown() //Como vários parâmetros são enviados pelo header o "unknown()" serve para descartar os que não foram validados
 
 })
@@ -50,7 +50,7 @@ const update = _ => celebrate({
     }),
 
     [Segments.HEADERS]: Joi.object({
-        authorization: Joi.string().required().length(95),
+        authorization: Joi.string().required(),
     }).unknown(), //Como vários parâmetros são enviados pelo header o "unknown()" serve para descartar os que não foram validados
 
     [Segments.BODY]: Joi.object().keys({
