@@ -9,6 +9,14 @@ const create = async (request, response) => {
     // Criando um Hash da senha para ser salvo no Banco
     const hash = await encryptPassword(password)
 
+    // Verificando se já existe uma universidade cadastrada neste email 
+    const university = await connection('university')
+        .where('email', email)
+        .first()
+        .catch(_ => response.status(400).json({ message: 'Erro no Banco' }))
+
+    if (university) return response.status(400).json({ message: 'Email já cadastrado no sistema' })
+
     // Inserindo dados na tabela
     await connection('university')
         .insert({
