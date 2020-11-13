@@ -1,10 +1,13 @@
+
 exports.up = function(knex) {
     return knex.schema.createTable('university', function (table) {
-        table.string('id').primary();
-        table.string('email').notNullable().unique();
-        table.string('password').notNullable();
+
+        table.increments('id').primary()
+
         table.string('IES').notNullable();
         table.string('telephone').notNullable();
+        table.string('email').notNullable().unique();
+        table.string('password').notNullable();
         table.string('uf', 2).notNullable();
         table.string('city').notNullable();
         table.string('address').notNullable();   
