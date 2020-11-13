@@ -91,7 +91,7 @@ const remove = async (request, response) => {
     const { id } = request.params
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
-    const universityId = request.headers.authorization
+    const auth = request
 
     // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso (EVITAR QUE UMA UNIVERSIDADE EXCLUA O CURSO DE OUTRA)
     const course = await connection('course')
@@ -100,7 +100,7 @@ const remove = async (request, response) => {
         .first()
         .catch(_ => response.status(500).json({ message: 'Falha no Sistema' }))
 
-    if (!course || universityId != course.university_id) return response.status(401).json({ message: 'Operação não permitida' })
+    if (!course || auth.id != course.university_id) return response.status(401).json({ message: 'Operação não permitida' })
 
     await connection('course')
         .where('id', id)  // Comparando o ID escolhido com o do banco

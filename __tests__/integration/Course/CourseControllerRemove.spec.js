@@ -4,13 +4,15 @@ const connection = require('../../../src/database/connection')
 
 describe("Course", () => {
 
+    let token
+
     beforeAll(async () => {
 
         await connection.migrate.rollback() // Realiza um rollback para evitar que o banco cresça sem controle
         await connection.migrate.latest() // Executa os migrates antes de dos testes serem chamados
 
         // Inserindo um dado no banco como teste
-        universityId = await request(app)
+        await request(app)
             .post('/university')
             .send({
                 IES: "Inatel",
@@ -24,12 +26,20 @@ describe("Course", () => {
                 site: "https://inatel.br/home/"
             })
 
-        universityId = universityId.body.id // Pegando o ID resultante da resposta
+        // Realizando o login
+        const response = await request(app)
+            .post('/session')
+            .send({
+                email: "guilherme@gmail.br",
+                password: "123"
+            })
+
+        token = response.body.token // Pegando o ID resultante da resposta
 
         // Adicionando 1 curso para testes
         await request(app)
             .post('/course')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
             .send({
                 name: "Engenharia de computação",
                 description: "Melhor Curso",
@@ -48,7 +58,7 @@ describe("Course", () => {
     it("Should be able to delete a Course", async () => {
         const response = await request(app)
             .delete('/course/1')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
 
         expect(response.status).toBe(204)
     })
@@ -65,6 +75,6 @@ describe("Course", () => {
             .delete('/course/1')
             .set("Authorization", '12345678')
 
-        expect(response.status).toBe(401)
+        expect(response.status).toBe(400)
     })
 })

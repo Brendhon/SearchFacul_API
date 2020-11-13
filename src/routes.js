@@ -34,7 +34,7 @@ routes.delete('/university', UniversityValidator.remove(), authorization.require
 routes.get('/course/:id', CourseValidator.listByID(), CourseController.listById)
 routes.get('/course/name/:name', CourseValidator.listByName(), CourseController.listByName)
 routes.post('/course', CourseValidator.create(), authorization.required, CourseController.create)
-routes.delete('/course/:id', CourseValidator.remove(), CourseController.remove)
+routes.delete('/course/:id', CourseValidator.remove(), authorization.required, CourseController.remove)
 routes.put('/course/:id', CourseValidator.update(), CourseController.update)
 
 module.exports = routes
