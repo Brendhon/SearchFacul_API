@@ -13,7 +13,4 @@ const config = env == 'test' ? configuration.test : configuration.development
 // Realizando a conexão no modo desenvolvimento
 const connection = knex(config)
 
-// Executando o comando de rodar as migrations pelo código
-connection.migrate.latest([config]) 
-
 module.exports = connection
