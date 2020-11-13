@@ -29,7 +29,6 @@ describe("University", () => {
             })
 
         expect(response.body).toHaveProperty('id')
-        expect(response.body.id).toHaveLength(8)
     })
 
     it("Shouldn't be able to create a new University without 'IES'", async () => {
@@ -155,7 +154,6 @@ describe("University", () => {
             })
 
         expect(response.body).toHaveProperty('id')
-        expect(response.body.id).toHaveLength(8)
     })
 
     it("Shouldn't be able to create a new University with incorrect UF", async () => {
@@ -214,7 +212,7 @@ describe("University", () => {
         expect(response.body.statusCode).toBe(400)
         expect(response.body.validation.body.keys).toEqual(["site"])
     })
-    
+
     it("Shouldn't be able to create a new University without 'email'", async () => {
         const response = await request(app)
             .post('/university')

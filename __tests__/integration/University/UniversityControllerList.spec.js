@@ -78,7 +78,7 @@ describe("University", () => {
             })
 
         const response = await request(app)
-            .get(`/university/${universityId}`)
+            .get('/university/1')
 
         expect(response.body[0].id).toBeTruthy()
         expect(response.body[0].score).toBe(4)
