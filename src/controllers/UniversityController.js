@@ -103,7 +103,7 @@ const listCourses = async (request, response) => {
 const remove = async (request, response) => {
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
-    const id = request.headers.authorization
+    const { id } = request
 
     // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso (EVITAR QUE UMA UNIVERSIDADE EXCLUA A OUTRA)
     const university = await connection('university')
@@ -135,7 +135,7 @@ const update = async (request, response) => {
     let { IES, telephone, uf, city, address, email, password, category, site } = request.body
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
-    const id = request.headers.authorization
+    const { id } = request
 
     // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso (EVITAR QUE UMA UNIVERSIDADE EXCLUA A OUTRA)
     const university = await connection('university')

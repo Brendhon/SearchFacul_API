@@ -12,7 +12,7 @@ describe("University", () => {
         await connection.migrate.latest() // Executa os migrates antes de dos testes serem chamados
 
         // Inserindo um dado no banco como teste
-        universityId = await request(app)
+        await request(app)
             .post('/university')
             .send({
                 IES: "Inatel",
@@ -26,7 +26,14 @@ describe("University", () => {
                 site: "https://inatel.br/home/"
             })
 
-        universityId = universityId.body.id // Pegando o ID resultante
+        const response = await request(app)
+            .post('/session')
+            .send({
+                email: "guilherme@gmail.br",
+                password: "123"
+            })
+
+        universityId = response.body.token // Pegando o token resultante da resposta
     })
 
     afterAll(async () => {
@@ -70,7 +77,7 @@ describe("University", () => {
                 site: "https://unifei.edu.br/"
             })
 
-        expect(response.status).toBe(401)
+        expect(response.status).toBe(400)
     })
 
 

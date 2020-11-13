@@ -18,7 +18,7 @@ const create = _ => celebrate({
 const remove = _ => celebrate({
 
     [Segments.HEADERS]: Joi.object({
-        authorization: Joi.string().required(),
+        authorization: Joi.string().required().length(95),
     }).unknown() //Como vários parâmetros são enviados pelo header o "unknown()" serve para descartar os que não foram validados
 
 })
@@ -59,7 +59,7 @@ const update = _ => celebrate({
     }),
 
     [Segments.HEADERS]: Joi.object({
-        authorization: Joi.string().required(),
+        authorization: Joi.string().required().length(95),
     }).unknown() //Como vários parâmetros são enviados pelo header o "unknown()" serve para descartar os que não foram validados
 })
 

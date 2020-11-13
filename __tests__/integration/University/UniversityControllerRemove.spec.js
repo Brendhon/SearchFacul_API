@@ -12,7 +12,7 @@ describe("University", () => {
         await connection.migrate.latest() // Executa os migrates antes de dos testes serem chamados
 
         // Inserindo um dado no banco como teste
-        universityId = await request(app)
+        await request(app)
             .post('/university')
             .send({
                 IES: "Inatel",
@@ -26,7 +26,14 @@ describe("University", () => {
                 site: "https://inatel.br/home/"
             })
 
-        universityId = universityId.body.id // Pegando o ID resultante da resposta
+        const response = await request(app)
+            .post('/session')
+            .send({
+                email: "guilherme@gmail.br",
+                password: "123"
+            })
+
+        universityId = response.body.token // Pegando o ID resultante da resposta
     })
 
     afterAll(async () => {
@@ -46,18 +53,18 @@ describe("University", () => {
 
         const response = await request(app)
             .delete('/university')
-            
+
         expect(response.body.statusCode).toBe(400)
     })
 
-    
+
     it("Shouldn't be able to remove a University with a different authorization", async () => {
 
         const response = await request(app)
             .delete('/university')
             .set("Authorization", "12345678")
 
-        expect(response.status).toBe(401)
+        expect(response.status).toBe(400)
     })
 
 })
