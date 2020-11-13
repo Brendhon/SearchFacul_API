@@ -40,7 +40,7 @@ const listByCity = async (request, response) => {
     await connection('university')
         .where('city', 'like', `%${city}%`)
         .select([
-            'university.*',
+            'university.id',
             'university.IES',
             'university.email',
             'university.city',
