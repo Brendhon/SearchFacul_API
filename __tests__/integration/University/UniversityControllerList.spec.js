@@ -6,6 +6,7 @@ const encrypt = require('../../utils/encrypt')
 describe("University", () => {
 
     let universityId
+    let token
 
     beforeAll(async () => {
 
@@ -28,6 +29,15 @@ describe("University", () => {
             })
 
         universityId = universityId.body.id // Pegando o ID resultante
+
+        const response = await request(app)
+            .post('/session')
+            .send({
+                email: "guilherme@gmail.br",
+                password: "123"
+            })
+
+        token = response.body.token // Pegando o ID resultante da resposta
     })
 
     afterAll(async () => {
@@ -57,7 +67,7 @@ describe("University", () => {
         // Inserindo um Curso no banco como teste
         await request(app)
             .post('/course')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
             .send({
                 name: "Engenharia de computação",
                 description: "Melhor Curso",
