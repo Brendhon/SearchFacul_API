@@ -4,7 +4,7 @@ const connection = require('../../../src/database/connection')
 
 describe("Profile", () => {
 
-    let universityId
+    let token
 
     beforeAll(async () => {
 
@@ -12,7 +12,7 @@ describe("Profile", () => {
         await connection.migrate.latest() // Executa os migrates antes de dos testes serem chamados
 
         // Inserindo um dado no banco como teste
-        universityId = await request(app)
+        await request(app)
             .post('/university')
             .send({
                 IES: "Inatel",
@@ -26,7 +26,14 @@ describe("Profile", () => {
                 site: "https://inatel.br/home/"
             })
 
-        universityId = universityId.body.id // Pegando o ID resultante
+        const response = await request(app)
+            .post('/session')
+            .send({
+                email: "guilherme@gmail.br",
+                password: "123"
+            })
+
+        token = response.body.token // Pegando o token resultante
     })
 
     afterAll(async () => {
@@ -37,7 +44,7 @@ describe("Profile", () => {
 
         const response = await request(app)
             .get('/profile')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
 
         expect(response.status).toBe(200)
     })
