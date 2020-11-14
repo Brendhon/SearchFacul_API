@@ -4,7 +4,7 @@ const connection = require('../../../src/database/connection')
 
 describe("University", () => {
 
-    let universityId
+    let token
 
     beforeAll(async () => {
 
@@ -33,7 +33,7 @@ describe("University", () => {
                 password: "123"
             })
 
-        universityId = response.body.token // Pegando o token resultante da resposta
+        token = response.body.token // Pegando o token resultante da resposta
     })
 
     afterAll(async () => {
@@ -44,7 +44,7 @@ describe("University", () => {
 
         const response = await request(app)
             .put('/university')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
             .send({
                 IES: "Unifei",
                 telephone: "34546789",

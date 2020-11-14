@@ -4,15 +4,13 @@ const connection = require('../../../src/database/connection')
 
 describe("Session", () => {
 
-    let universityId
-
     beforeAll(async () => {
 
         await connection.migrate.rollback() // Realiza um rollback para evitar que o banco cresça sem controle
         await connection.migrate.latest() // Executa os migrates antes de dos testes serem chamados
 
         // Inserindo um dado no banco como teste
-        universityId = await request(app)
+        await request(app)
             .post('/university')
             .send({
                 IES: "Inatel",
@@ -25,8 +23,6 @@ describe("Session", () => {
                 category: "privada",
                 site: "https://inatel.br/home/"
             })
-
-        universityId = universityId.body.id // Pegando o ID resultante
     })
 
     afterAll(async () => {

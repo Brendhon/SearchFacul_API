@@ -4,7 +4,6 @@ const connection = require('../../../src/database/connection')
 
 describe("University", () => {
 
-    let universityId
     let token
 
     beforeAll(async () => {
@@ -13,7 +12,7 @@ describe("University", () => {
         await connection.migrate.latest() // Executa os migrates antes de dos testes serem chamados
 
         // Inserindo um dado no banco como teste
-        universityId = await request(app)
+        await request(app)
             .post('/university')
             .send({
                 IES: "Inatel",
@@ -26,8 +25,6 @@ describe("University", () => {
                 category: "privada",
                 site: "https://inatel.br/home/"
             })
-
-        universityId = universityId.body.id // Pegando o ID resultante
 
         const response = await request(app)
             .post('/session')

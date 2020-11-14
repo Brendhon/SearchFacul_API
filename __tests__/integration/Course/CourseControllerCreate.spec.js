@@ -4,7 +4,7 @@ const connection = require('../../../src/database/connection')
 
 describe("Course", () => {
 
-    let universityId
+    let token
 
     beforeAll(async () => {
 
@@ -33,7 +33,7 @@ describe("Course", () => {
                 password: "123"
             })
 
-        universityId = response.body.token // Pegando o ID resultante da resposta
+        token = response.body.token // Pegando o ID resultante da resposta
 
     })
 
@@ -44,7 +44,7 @@ describe("Course", () => {
     it("Should be able to create a new Course", async () => {
         const response = await request(app)
             .post('/course')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
             .send({
                 name: "Engenharia de computação",
                 description: "Melhor Curso",
@@ -91,7 +91,7 @@ describe("Course", () => {
     it("Shouldn't be able to create a new Course without name", async () => {
         const response = await request(app)
             .post('/course')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
             .send({
                 description: "Melhor Curso",
                 duration: "5 anos",
@@ -107,7 +107,7 @@ describe("Course", () => {
     it("Shouldn't be able to create a new Course without description", async () => {
         const response = await request(app)
             .post('/course')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
             .send({
                 name: "Engenharia de computação",
                 duration: "5 anos",
@@ -123,7 +123,7 @@ describe("Course", () => {
     it("Shouldn't be able to create a new Course without duration", async () => {
         const response = await request(app)
             .post('/course')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
             .send({
                 name: "Engenharia de computação",
                 description: "Melhor Curso",
@@ -139,7 +139,7 @@ describe("Course", () => {
     it("Shouldn't be able to create a new Course without titration", async () => {
         const response = await request(app)
             .post('/course')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
             .send({
                 name: "Engenharia de computação",
                 description: "Melhor Curso",
@@ -155,7 +155,7 @@ describe("Course", () => {
     it("Shouldn't be able to create a new Course without modality", async () => {
         const response = await request(app)
             .post('/course')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
             .send({
                 name: "Engenharia de computação",
                 description: "Melhor Curso",
@@ -171,7 +171,7 @@ describe("Course", () => {
     it("Should be able to create a new Course without score", async () => {
         const response = await request(app)
             .post('/course')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
             .send({
                 name: "Engenharia de computação",
                 description: "Melhor Curso",
@@ -186,7 +186,7 @@ describe("Course", () => {
     it("Shouldn't be able to create a new Course with incorrect score", async () => {
         const response = await request(app)
             .post('/course')
-            .set("Authorization", universityId)
+            .set("Authorization", token)
             .send({
                 name: "Engenharia de computação",
                 description: "Melhor Curso",
