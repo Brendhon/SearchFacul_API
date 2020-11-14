@@ -13,7 +13,7 @@ const required = (request, response, next) => {
         const decode = decodeJwt(token)
 
         if (decode) {
-            request.university_id = decode
+            request.university_id = decode.id
             return next()
         }
 

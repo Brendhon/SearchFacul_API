@@ -16,7 +16,7 @@ const create = async (request, response) => {
             const samePassword = await comparePassword(password, university.password)
 
             if (samePassword) return response.json({
-                token: encodeJwt(university.id)
+                token: encodeJwt({id: university.id, email: university.email})
             }) // Retornando o token como resposta 
             
             else return response.status(400).json({ message: 'Senha incorreta' }) // Verificando se Universidade foi encontrada
