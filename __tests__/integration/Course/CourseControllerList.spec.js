@@ -1,11 +1,14 @@
 const request = require('supertest')
 const app = require('../../../src/app')
 const connection = require('../../../src/database/connection')
+const CONSTANTS = require('../../utils/constants')
 
 describe("Course", () => {
 
+    // Atributos
     let token
 
+    // Antes de todos execute...
     beforeAll(async () => {
 
         await connection.migrate.rollback() // Realiza um rollback para evitar que o banco cresça sem controle
@@ -14,24 +17,11 @@ describe("Course", () => {
         // Inserindo um dado no banco como teste
         await request(app)
             .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MG",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada",
-                site: "https://inatel.br/home/"
-            })
+            .send(CONSTANTS.universityExample)
 
         const response = await request(app)
             .post('/session')
-            .send({
-                email: "guilherme@gmail.br",
-                password: "123"
-            })
+            .send(CONSTANTS.loginExample)
 
         token = response.body.token // Pegando o Token resultante da resposta
 
@@ -39,29 +29,15 @@ describe("Course", () => {
         await request(app)
             .post('/course')
             .set("Authorization", token)
-            .send({
-                name: "Engenharia de computação",
-                description: "Melhor Curso",
-                duration: "5 anos",
-                titration: "Bacharelado",
-                modality: "Presencial",
-                score: 4
-            })
+            .send(CONSTANTS.courseExample)
 
         await request(app)
             .post('/course')
             .set("Authorization", token)
-            .send({
-                name: "Engenharia de Produção",
-                description: "ADM com CREA",
-                duration: "5 anos",
-                titration: "Bacharelado",
-                modality: "Presencial",
-                score: 4
-            })
-
+            .send(CONSTANTS.courseExample2)
     })
 
+    // Depois de todos execute...
     afterAll(async () => {
         await connection.destroy() // Apos TODOS os testes serem executados destrua a conexão
     })

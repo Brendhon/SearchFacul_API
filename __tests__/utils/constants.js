@@ -19,9 +19,18 @@ const courseExample = {
     score: 4
 }
 
+const courseExample2 = {
+    name: "Engenharia de Produção",
+    description: "ADM com CREA",
+    duration: "5 anos",
+    titration: "Bacharelado",
+    modality: "Presencial",
+    score: 4
+}
+
 const loginExample = {
     email: "guilherme@gmail.br",
     password: "123"
 }
 
-module.exports = { universityExample, courseExample, loginExample }
+module.exports = { universityExample, courseExample, loginExample, courseExample2 }
