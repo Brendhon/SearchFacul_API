@@ -1,6 +1,7 @@
 const express = require('express') // Importando o modulo express
 
 const authorization = require('./middleware/authorization')
+const integrity = require('./middleware/integrity')
 
 const UniversityController = require('./controllers/UniversityController')
 const CourseController = require('./controllers/CourseController')
@@ -11,7 +12,6 @@ const CourseValidator = require('./validators/CourseValidator')
 const ProfileValidator = require('./validators/ProfileValidator')
 const UniversityValidator = require('./validators/UniversityValidator')
 const SessionValidator = require('./validators/SessionValidator')
-
 
 // Extraindo o modulo Rotas do express e atribuindo-o a uma variável
 const routes = express.Router()
@@ -26,8 +26,11 @@ routes.get('/profile', ProfileValidator.listCourses(), authorization.required, P
 routes.get('/university/:id', UniversityValidator.listCourses(), UniversityController.listCourses)
 routes.get('/university/ies/:name', UniversityValidator.listByName(), UniversityController.listByName)
 routes.get('/university/city/:city', UniversityValidator.listByCity(), UniversityController.listByCity)
-routes.put('/university', UniversityValidator.update(), authorization.required, UniversityController.update)
-routes.post('/university', UniversityValidator.create(), UniversityController.create)
+routes.put('/university', UniversityValidator.update(),
+    integrity.universityAttributes,
+    authorization.required,
+    UniversityController.update)
+routes.post('/university', UniversityValidator.create(), integrity.universityAttributes, UniversityController.create)
 routes.delete('/university', UniversityValidator.remove(), authorization.required, UniversityController.remove)
 
 // Rotas pertencentes aos cursos

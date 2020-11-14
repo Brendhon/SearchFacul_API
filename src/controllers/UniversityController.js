@@ -5,32 +5,23 @@ const CONSTANTS = require('../utils/constants')
 const create = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { IES, telephone, uf, city, email, password, address, category, site } = request.body
+    const { universityAttributes } = request.body
 
     // Criando um Hash da senha para ser salvo no Banco
-    const hash = await encryptPassword(password)
+    universityAttributes.password = await encryptPassword(universityAttributes.password)
 
     // Verificando se já existe uma universidade cadastrada neste email 
     const university = await connection('university')
-        .where('email', email)
+        .where('email', universityAttributes.email)
         .first()
         .catch(_ => response.status(400).json({ message: 'Erro no Banco' }))
 
+    // Verifica se o email já esta cadastrado
     if (university) return response.status(400).json({ message: 'Email já cadastrado no sistema' })
 
     // Inserindo dados na tabela
     await connection('university')
-        .insert({
-            IES,
-            telephone,
-            email,
-            password: hash, // Salvando o hash da senha
-            uf,
-            city,
-            address,
-            category,
-            site
-        })
+        .insert(universityAttributes)
         .then(([id]) => response.json({ id })) // Retornando o ID como resposta 
         .catch(_ => response.status(400).json({ message: 'Falha ao criar' }))
 
@@ -118,7 +109,7 @@ const remove = async (request, response) => {
 const update = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    let { IES, telephone, uf, city, address, email, password, category, site } = request.body
+    const { universityAttributes } = request.body
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const { university_id } = request
@@ -132,22 +123,12 @@ const update = async (request, response) => {
 
     if (!university || university_id != university.id) return response.status(401).json({ message: 'Operação não permitida' })
 
-    if (password) password = await encryptPassword(password)
+    if (universityAttributes.password) universityAttributes.password = await encryptPassword(universityAttributes.password)
 
     // Inserindo dados na tabela
     await connection('university')
         .where('id', university_id)
-        .update({
-            IES,
-            telephone,
-            email,
-            password,
-            uf,
-            city,
-            address,
-            category,
-            site
-        })
+        .update(universityAttributes)
         .then(_ => response.status(204).send())
         .catch(_ => response.status(400).json({ message: 'Falha ao criar' }))
 
