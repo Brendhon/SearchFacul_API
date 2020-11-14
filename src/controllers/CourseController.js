@@ -4,7 +4,7 @@ const CONSTANTS = require('../utils/constants')
 const create = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { name, description, duration, titration, modality, score } = request.body
+    const { courseAttributes } = request.body
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const { university_id } = request
@@ -20,12 +20,7 @@ const create = async (request, response) => {
     // Realizando um destruction no array resultado da inserção para pegar o id gerado
     await connection('course')
         .insert({
-            name,
-            description,
-            duration,
-            titration,
-            modality,
-            score,
+            ...courseAttributes,
             university_id
         })
         .then(([id]) => response.json({ id })) // Retornando o ID como resposta 
@@ -94,7 +89,7 @@ const remove = async (request, response) => {
 const update = async (request, response) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { name, description, duration, titration, modality, score } = request.body
+    const { courseAttributes } = request.body
 
     // Pegando o ID do curso que será atualizado
     const { id } = request.params
@@ -114,14 +109,7 @@ const update = async (request, response) => {
     // Inserindo dados na tabela
     await connection('course')
         .where('id', id)
-        .update({
-            name,
-            description,
-            duration,
-            titration,
-            modality,
-            score
-        })
+        .update(courseAttributes)
         .then(_ => response.status(204).send())
         .catch(_ => response.status(500).json({ message: 'Falha ao criar' }))
 

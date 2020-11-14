@@ -26,7 +26,8 @@ routes.get('/profile', ProfileValidator.listCourses(), authorization.required, P
 routes.get('/university/:id', UniversityValidator.listCourses(), UniversityController.listCourses)
 routes.get('/university/ies/:name', UniversityValidator.listByName(), UniversityController.listByName)
 routes.get('/university/city/:city', UniversityValidator.listByCity(), UniversityController.listByCity)
-routes.put('/university', UniversityValidator.update(),
+routes.put('/university',
+    UniversityValidator.update(),
     integrity.universityAttributes,
     authorization.required,
     UniversityController.update)
@@ -36,8 +37,12 @@ routes.delete('/university', UniversityValidator.remove(), authorization.require
 // Rotas pertencentes aos cursos
 routes.get('/course/:id', CourseValidator.listByID(), CourseController.listById)
 routes.get('/course/name/:name', CourseValidator.listByName(), CourseController.listByName)
-routes.post('/course', CourseValidator.create(), authorization.required, CourseController.create)
+routes.post('/course', CourseValidator.create(), integrity.courseAttributes, authorization.required, CourseController.create)
 routes.delete('/course/:id', CourseValidator.remove(), authorization.required, CourseController.remove)
-routes.put('/course/:id', CourseValidator.update(), authorization.required, CourseController.update)
+routes.put('/course/:id',
+    CourseValidator.update(),
+    integrity.courseAttributes,
+    authorization.required,
+    CourseController.update)
 
 module.exports = routes
