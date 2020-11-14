@@ -1,5 +1,6 @@
 const connection = require('../database/connection')
 const { encryptPassword } = require('../utils/auth')
+const CONSTANTS = require('../utils/constants')
 
 const create = async (request, response) => {
 
@@ -42,17 +43,7 @@ const listByCity = async (request, response) => {
 
     await connection('university')
         .where('city', 'like', `%${city}%`)
-        .select([
-            'university.id',
-            'university.IES',
-            'university.email',
-            'university.city',
-            'university.telephone',
-            'university.uf',
-            'university.address',
-            'university.category',
-            'university.site'
-        ])
+        .select(CONSTANTS.universityData)
         .then(universities => {
             response.header('X-Total-Count', universities.length) // Pegando o numero de universidades resultantes da busca
             return response.json(universities)
@@ -68,17 +59,7 @@ const listByName = async (request, response) => {
 
     await connection('university')
         .where('IES', 'like', `%${name}%`)
-        .select([
-            'university.id',
-            'university.IES',
-            'university.email',
-            'university.city',
-            'university.telephone',
-            'university.uf',
-            'university.address',
-            'university.category',
-            'university.site'
-        ])
+        .select(CONSTANTS.universityData)
         .then(universities => {
             response.header('X-Total-Count', universities.length)
             return response.json(universities)
@@ -94,7 +75,9 @@ const listCourses = async (request, response) => {
 
     // Buscando lista de cursos referente a uma faculdade especifica 
     await connection('course')
+        .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
         .where('university_id', id)
+        .select(CONSTANTS.universityAndCourseData)
         .then(courses => {
             response.header('X-Total-Count', courses.length) // Passando o total de elementos
             return response.json(courses)
@@ -149,7 +132,7 @@ const update = async (request, response) => {
 
     if (!university || university_id != university.id) return response.status(401).json({ message: 'Operação não permitida' })
 
-    if (password) password = encryptPassword(password)
+    if (password) password = await encryptPassword(password)
 
     // Inserindo dados na tabela
     await connection('university')

@@ -1,4 +1,5 @@
 const connection = require('../database/connection')
+const CONSTANTS = require('../utils/constants')
 
 const create = async (request, response) => {
 
@@ -40,17 +41,7 @@ const listByName = async (request, response) => {
     await connection('course')
         .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
         .where('course.name', 'like', `%${name}%`)
-        .select([
-            'course.*', //Selecionando todos os dados dos cursos 
-            'university.IES',
-            'university.email',
-            'university.city',
-            'university.telephone',
-            'university.uf',
-            'university.address',
-            'university.category',
-            'university.site'
-        ])
+        .select(CONSTANTS.universityAndCourseData)
         .then(courses => {
             response.header('X-Total-Count', courses.length)
             return response.json(courses)
@@ -68,17 +59,7 @@ const listById = async (request, response) => {
     await connection('course')
         .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
         .where('course.id', id)
-        .select([
-            'course.*', //Selecionando todos os dados dos cursos 
-            'university.IES',
-            'university.email',
-            'university.city',
-            'university.telephone',
-            'university.uf',
-            'university.address',
-            'university.category',
-            'university.site'
-        ])
+        .select(CONSTANTS.universityAndCourseData)
         .first() // Pegando o primeiro que ele encontrar
         .then(courses => response.json(courses))
         .catch(_ => response.status(500).json({ message: 'Erro no sistema' }))
