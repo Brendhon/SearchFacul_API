@@ -1,14 +1,25 @@
 const request = require('supertest')
 const app = require('../../../src/app')
 const connection = require('../../../src/database/connection')
+const CONSTANTS = require('../../utils/constants')
 
 describe("University", () => {
 
+    // Atributos
+    let universityExample
+
+    // Antes de todos execute...
     beforeAll(async () => {
         await connection.migrate.rollback() // Realiza um rollback para evitar que o banco cresça sem controle
         await connection.migrate.latest() // Executa os migrates antes de dos testes serem chamados
     })
 
+    // Antes de cada execute...
+    beforeEach(() => {
+        universityExample = Object.assign({}, CONSTANTS.universityExample) // Clonando o objetivo para não mexer na variável original
+    })
+
+    // Depois de todos execute...
     afterAll(async () => {
         await connection.destroy() // Apos TODOS os testes serem executados destrua a conexão
     })
@@ -16,256 +27,166 @@ describe("University", () => {
     it("Should be able to create a new University", async () => {
         const response = await request(app)
             .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                email: "guilherme@gmail.com.br",
-                password: "123",
-                uf: "MG",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada",
-                site: "https://inatel.br/home/"
-            })
+            .send(universityExample)
 
         expect(response.body).toHaveProperty('id')
     })
 
     it("Shouldn't be able to create a new University without 'IES'", async () => {
+
+        delete universityExample["IES"]  // Removendo atributo desejado
+
         const response = await request(app)
             .post('/university')
-            .send({
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MG",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada",
-                site: "https://inatel.br/home/"
-            })
+            .send(universityExample)
 
         expect(response.body.statusCode).toBe(400)
         expect(response.body.validation.body.keys).toEqual(["IES"])
     })
 
     it("Shouldn't be able to create a new University without 'telephone'", async () => {
+
+        delete universityExample["telephone"]  // Removendo atributo desejado
+
         const response = await request(app)
             .post('/university')
-            .send({
-                IES: "Inatel",
-                uf: "MG",
-                email: "guilherme@gmail.br",
-                password: "123",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada",
-                site: "https://inatel.br/home/"
-            })
+            .send(universityExample)
 
         expect(response.body.statusCode).toBe(400)
         expect(response.body.validation.body.keys).toEqual(["telephone"])
-    })
-
-    it("Shouldn't be able to create a new University without 'uf'", async () => {
-        const response = await request(app)
-            .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada",
-                site: "https://inatel.br/home/"
-            })
-
-        expect(response.body.statusCode).toBe(400)
-        expect(response.body.validation.body.keys).toEqual(["uf"])
-    })
-
-    it("Shouldn't be able to create a new University without 'city'", async () => {
-        const response = await request(app)
-            .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MG",
-                address: "Sei não",
-                category: "privada",
-                site: "https://inatel.br/home/"
-            })
-
-        expect(response.body.statusCode).toBe(400)
-        expect(response.body.validation.body.keys).toEqual(["city"])
-    })
-
-    it("Shouldn't be able to create a new University without 'address'", async () => {
-        const response = await request(app)
-            .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MG",
-                city: "Santa Rita",
-                category: "privada",
-                site: "https://inatel.br/home/"
-            })
-
-        expect(response.body.statusCode).toBe(400)
-        expect(response.body.validation.body.keys).toEqual(["address"])
-    })
-
-    it("Shouldn't be able to create a new University without 'category'", async () => {
-        const response = await request(app)
-            .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MG",
-                city: "Santa Rita",
-                address: "Sei não",
-                site: "https://inatel.br/home/"
-            })
-
-        expect(response.body.statusCode).toBe(400)
-        expect(response.body.validation.body.keys).toEqual(["category"])
-    })
-
-    it("Should be able to create a new University without 'site'", async () => {
-        const response = await request(app)
-            .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MG",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada"
-            })
-
-        expect(response.body).toHaveProperty('id')
-    })
-
-    it("Shouldn't be able to create a new University with incorrect UF", async () => {
-        const response = await request(app)
-            .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MGA",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada",
-                site: "https://inatel.br/home/"
-            })
-
-        expect(response.body.statusCode).toBe(400)
-        expect(response.body.validation.body.keys).toEqual(["uf"])
-    })
-
-    it("Shouldn't be able to create a new University with incorrect telephone", async () => {
-        const response = await request(app)
-            .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789a",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MG",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada",
-                site: "https://inatel.br/home/"
-            })
-
-        expect(response.body.statusCode).toBe(400)
-        expect(response.body.validation.body.keys).toEqual(["telephone"])
-    })
-
-    it("Shouldn't be able to create a new University with incorrect site", async () => {
-        const response = await request(app)
-            .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MG",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada",
-                site: "inatel.br/home/"
-            })
-
-        expect(response.body.statusCode).toBe(400)
-        expect(response.body.validation.body.keys).toEqual(["site"])
     })
 
     it("Shouldn't be able to create a new University without 'email'", async () => {
+
+        delete universityExample["email"]  // Removendo atributo desejado
+
         const response = await request(app)
             .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                password: "123",
-                uf: "MG",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada",
-                site: "inatel.br/home/"
-            })
-
-        expect(response.body.statusCode).toBe(400)
-        expect(response.body.validation.body.keys).toEqual(["email"])
-    })
-
-    it("Shouldn't be able to create a new University with incorrect 'email'", async () => {
-        const response = await request(app)
-            .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                email: "guilherme",
-                password: "123",
-                uf: "MG",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada",
-                site: "inatel.br/home/"
-            })
+            .send(universityExample)
 
         expect(response.body.statusCode).toBe(400)
         expect(response.body.validation.body.keys).toEqual(["email"])
     })
 
     it("Shouldn't be able to create a new University without 'password'", async () => {
+        
+        delete universityExample["password"]  // Removendo atributo desejado
+
         const response = await request(app)
             .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                uf: "MG",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada",
-                site: "inatel.br/home/"
-            })
+            .send(universityExample)
 
         expect(response.body.statusCode).toBe(400)
         expect(response.body.validation.body.keys).toEqual(["password"])
+    })
+
+    it("Shouldn't be able to create a new University without 'uf'", async () => {
+
+        delete universityExample["uf"]  // Removendo atributo desejado
+
+        const response = await request(app)
+            .post('/university')
+            .send(universityExample)
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["uf"])
+    })
+
+    it("Shouldn't be able to create a new University without 'city'", async () => {
+
+        delete universityExample["city"]  // Removendo atributo desejado
+
+        const response = await request(app)
+            .post('/university')
+            .send(universityExample)
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["city"])
+    })
+
+    it("Shouldn't be able to create a new University without 'address'", async () => {
+
+        delete universityExample["address"]  // Removendo atributo desejado
+
+        const response = await request(app)
+            .post('/university')
+            .send(universityExample)
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["address"])
+    })
+
+    it("Shouldn't be able to create a new University without 'category'", async () => {
+
+        delete universityExample["category"]  // Removendo atributo desejado
+
+        const response = await request(app)
+            .post('/university')
+            .send(universityExample)
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["category"])
+    })
+
+    it("Should be able to create a new University without 'site'", async () => {
+
+        delete universityExample["site"]  // Removendo atributo desejado
+
+        universityExample.email = "guilherme@hotmail.com" // Atribuindo um novo email para evitar colisão 
+
+        const response = await request(app)
+            .post('/university')
+            .send(universityExample)
+
+        expect(response.body).toHaveProperty('id')
+    })
+
+    it("Shouldn't be able to create a new University with incorrect UF", async () => {
+
+        universityExample.uf = "MGA"
+
+        const response = await request(app)
+            .post('/university')
+            .send(universityExample)
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["uf"])
+    })
+
+    it("Shouldn't be able to create a new University with incorrect telephone", async () => {
+        
+        universityExample.telephone = "34546789a"
+
+        const response = await request(app)
+            .post('/university')
+            .send(universityExample)
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["telephone"])
+    })
+
+    it("Shouldn't be able to create a new University with incorrect site", async () => {
+
+        universityExample.site = "inatel.br/home/"
+
+        const response = await request(app)
+            .post('/university')
+            .send(universityExample)
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["site"])
+    })
+
+    it("Shouldn't be able to create a new University with incorrect 'email'", async () => {
+        
+        universityExample.email = "guilherme"
+
+        const response = await request(app)
+            .post('/university')
+            .send(universityExample)
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["email"])
     })
 
 })
