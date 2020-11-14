@@ -1,11 +1,14 @@
 const request = require('supertest')
 const app = require('../../../src/app')
 const connection = require('../../../src/database/connection')
+const CONSTANTS = require('../../utils/constants')
 
 describe("University", () => {
 
+    // Atributos
     let token
 
+    // Antes de todos execute...
     beforeAll(async () => {
 
         await connection.migrate.rollback() // Realiza um rollback para evitar que o banco cresça sem controle
@@ -14,28 +17,16 @@ describe("University", () => {
         // Inserindo um dado no banco como teste
         await request(app)
             .post('/university')
-            .send({
-                IES: "Inatel",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MG",
-                city: "Santa Rita",
-                address: "Sei não",
-                category: "privada",
-                site: "https://inatel.br/home/"
-            })
+            .send(CONSTANTS.universityExample)
 
         const response = await request(app)
             .post('/session')
-            .send({
-                email: "guilherme@gmail.br",
-                password: "123"
-            })
+            .send(CONSTANTS.loginExample)
 
         token = response.body.token // Pegando o token resultante da resposta
     })
 
+    // Antes de cada execute...
     afterAll(async () => {
         await connection.destroy() // Apos TODOS os testes serem executados destrua a conexão
     })
@@ -45,17 +36,7 @@ describe("University", () => {
         const response = await request(app)
             .put('/university')
             .set("Authorization", token)
-            .send({
-                IES: "Unifei",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MG",
-                city: "Itajubá",
-                address: "Sei não",
-                category: "pública",
-                site: "https://unifei.edu.br/"
-            })
+            .send(CONSTANTS.universityExample2)
 
         expect(response.status).toBe(204)
     })
@@ -65,17 +46,7 @@ describe("University", () => {
         const response = await request(app)
             .put('/university')
             .set("Authorization", 'debf92c1')
-            .send({
-                IES: "Unifei",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MG",
-                city: "Itajubá",
-                address: "Sei não",
-                category: "pública",
-                site: "https://unifei.edu.br/"
-            })
+            .send(CONSTANTS.universityExample2)
 
         expect(response.status).toBe(400)
     })
@@ -85,17 +56,7 @@ describe("University", () => {
 
         const response = await request(app)
             .put('/university')
-            .send({
-                IES: "Unifei",
-                telephone: "34546789",
-                email: "guilherme@gmail.br",
-                password: "123",
-                uf: "MG",
-                city: "Itajubá",
-                address: "Sei não",
-                category: "pública",
-                site: "https://unifei.edu.br/"
-            })
+            .send(CONSTANTS.universityExample2)
 
         expect(response.body.statusCode).toBe(400)
     })

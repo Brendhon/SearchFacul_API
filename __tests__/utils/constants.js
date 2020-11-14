@@ -10,6 +10,18 @@ const universityExample = {
     site: "https://inatel.br/home/"
 }
 
+const universityExample2 = {
+    IES: "Unifei",
+    telephone: "34546789",
+    email: "guilherme@hotmail.com",
+    password: "456",
+    uf: "MG",
+    city: "Itajubá",
+    address: "Sei não",
+    category: "pública",
+    site: "https://unifei.edu.br/"
+}
+
 const courseExample = {
     name: "Engenharia de computação",
     description: "Melhor Curso",
@@ -33,4 +45,4 @@ const loginExample = {
     password: "123"
 }
 
-module.exports = { universityExample, courseExample, loginExample, courseExample2 }
+module.exports = { universityExample, universityExample2, courseExample, loginExample, courseExample2 }
