@@ -6,11 +6,11 @@ const create = async (request, response) => {
     const { name, description, duration, titration, modality, score } = request.body
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
-    const auth = request
+    const { university_id } = request
 
     // Verificando se faculdade foi encontrada
     const university = await connection('university')
-        .where('id', auth.id)
+        .where('id', university_id)
         .first()
         .catch(_ => response.status(500).json({ message: 'Falha ao servidor' }))
 
@@ -25,7 +25,7 @@ const create = async (request, response) => {
             titration,
             modality,
             score,
-            university_id: auth.id
+            university_id
         })
         .then(([id]) => response.json({ id })) // Retornando o ID como resposta 
         .catch(_ => response.status(500).json({ message: 'Falha ao criar' }))
@@ -91,7 +91,7 @@ const remove = async (request, response) => {
     const { id } = request.params
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
-    const auth = request
+    const { university_id } = request
 
     // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso (EVITAR QUE UMA UNIVERSIDADE EXCLUA O CURSO DE OUTRA)
     const course = await connection('course')
@@ -100,7 +100,7 @@ const remove = async (request, response) => {
         .first()
         .catch(_ => response.status(500).json({ message: 'Falha no Sistema' }))
 
-    if (!course || auth.id != course.university_id) return response.status(401).json({ message: 'Operação não permitida' })
+    if (!course || university_id != course.university_id) return response.status(401).json({ message: 'Operação não permitida' })
 
     await connection('course')
         .where('id', id)  // Comparando o ID escolhido com o do banco
@@ -119,16 +119,16 @@ const update = async (request, response) => {
     const { id } = request.params
 
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
-    const auth = request
+    const { university_id } = request
 
     // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso
     const course = await connection('course')
-        .where('university_id', auth.id)
+        .where('university_id', university_id)
         .select('university_id')
         .first()
         .catch(_ => response.status(500).json({ message: 'Falha no Sistema' }))
 
-    if (!course || course.university_id != auth.id) return response.status(401).json({ message: 'Operação não permitida' })
+    if (!course || course.university_id != university_id) return response.status(401).json({ message: 'Operação não permitida' })
 
     // Inserindo dados na tabela
     await connection('course')
