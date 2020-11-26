@@ -8,10 +8,10 @@ const create = _ => celebrate({
 
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
-        description: Joi.string().required(), 
-        duration: Joi.string().required(), 
-        titration: Joi.string().required(), 
-        modality: Joi.string().required(), 
+        description: Joi.string().required(),
+        duration: Joi.string().required(),
+        titration: Joi.string().required(),
+        modality: Joi.string().required(),
         score: Joi.number().min(1).max(5)
     })
 })
@@ -20,6 +20,21 @@ const listByName = _ => celebrate({
 
     [Segments.PARAMS]: Joi.object().keys({
         name: Joi.string().required()
+    })
+})
+
+
+const listByIes = _ => celebrate({
+
+    [Segments.PARAMS]: Joi.object().keys({
+        ies: Joi.string().required()
+    })
+})
+
+const listByCity = _ => celebrate({
+
+    [Segments.PARAMS]: Joi.object().keys({
+        city: Joi.string().required()
     })
 })
 
@@ -55,12 +70,20 @@ const update = _ => celebrate({
 
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string(), // Valida que o nome tem que ser uma String e que é requerido (obrigatório)
-        description: Joi.string(), 
-        duration: Joi.string(), 
-        titration: Joi.string(), 
-        modality: Joi.string(), 
+        description: Joi.string(),
+        duration: Joi.string(),
+        titration: Joi.string(),
+        modality: Joi.string(),
         score: Joi.number().min(1).max(5)
     })
 })
 
-module.exports = { create, listByName, listByID, remove, update }
+module.exports = {
+    create,
+    listByName,
+    listByIes,
+    listByCity,
+    listByID,
+    remove,
+    update
+}

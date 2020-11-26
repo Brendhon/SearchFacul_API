@@ -45,6 +45,42 @@ const listByName = async (request, response) => {
 
 }
 
+const listByCity = async (request, response) => {
+
+    // Pegando o Curso escolhido pelo usuário 
+    const { city } = request.params
+
+    // Buscando lista de cursos
+    await connection('course')
+        .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
+        .where('university.city', 'like', `%${city}%`)
+        .select(CONSTANTS.universityAndCourseData)
+        .then(courses => {
+            response.header('X-Total-Count', courses.length)
+            return response.json(courses)
+        })
+        .catch(_ => response.status(500).json({ message: 'Erro no sistema' }))
+
+}
+
+const listByIes = async (request, response) => {
+
+    // Pegando o Curso escolhido pelo usuário 
+    const { ies } = request.params
+    
+    // Buscando lista de cursos
+    await connection('course')
+        .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
+        .where('university.ies', 'like', `%${ies}%`)
+        .select(CONSTANTS.universityAndCourseData)
+        .then(courses => {
+            response.header('X-Total-Count', courses.length)
+            return response.json(courses)
+        })
+        .catch(_ => response.status(500).json({ message: 'Erro no sistema' }))
+
+}
+
 const listById = async (request, response) => {
 
     // Pegando o Curso escolhido pelo usuário 
@@ -115,4 +151,12 @@ const update = async (request, response) => {
 
 }
 
-module.exports = { create, listByName, listById, remove, update }
+module.exports = {
+    create,
+    listByName,
+    listByIes,
+    listByCity,
+    listById,
+    remove,
+    update
+}

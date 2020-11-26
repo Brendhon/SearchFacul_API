@@ -50,6 +50,24 @@ describe("Course", () => {
         expect(response.body[0]).toHaveProperty('IES')
         expect(response.body).toHaveLength(1);
     })
+    
+    it("Should be able to list a course by city", async () => {
+
+        const response = await request(app)
+            .get('/course/city/santa')
+
+        expect(response.body[0].id).toBeTruthy()
+        expect(response.body[0].city).toBe('Santa Rita')
+    })
+
+    it("Should be able to list a course by ies", async () => {
+
+        const response = await request(app)
+            .get('/course/ies/inatel')
+
+        expect(response.body[0].id).toBeTruthy()
+        expect(response.body[0].IES).toBe('Inatel')
+    })
 
     it("Should be able to list a Course by id", async () => {
         const response = await request(app)

@@ -31,24 +31,6 @@ describe("University", () => {
         await connection.destroy() // Apos TODOS os testes serem executados destrua a conexão
     })
 
-    it("Should be able to list a University by city", async () => {
-
-        const response = await request(app)
-            .get('/university/city/santa')
-
-        expect(response.body[0].id).toBeTruthy()
-        expect(response.body[0].city).toBe('Santa Rita')
-    })
-
-    it("Should be able to list a University by name", async () => {
-
-        const response = await request(app)
-            .get('/university/ies/inatel')
-
-        expect(response.body[0].id).toBeTruthy()
-        expect(response.body[0].IES).toBe('Inatel')
-    })
-
     it("Should be able to list all courses belonging to university", async () => {
 
         // Inserindo um Curso no banco como teste

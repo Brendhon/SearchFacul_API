@@ -27,38 +27,6 @@ const create = async (request, response) => {
 
 }
 
-const listByCity = async (request, response) => {
-
-    // Pegando o Curso escolhido pelo usuário 
-    const { city } = request.params
-
-    await connection('university')
-        .where('city', 'like', `%${city}%`)
-        .select(CONSTANTS.universityData)
-        .then(universities => {
-            response.header('X-Total-Count', universities.length) // Pegando o numero de universidades resultantes da busca
-            return response.json(universities)
-        })
-        .catch(_ => response.status(400).json({ message: 'Falha ao buscar as universidades da cidade' }))
-
-}
-
-const listByName = async (request, response) => {
-
-    // Pegando o Curso escolhido pelo usuário 
-    const { name } = request.params
-
-    await connection('university')
-        .where('IES', 'like', `%${name}%`)
-        .select(CONSTANTS.universityData)
-        .then(universities => {
-            response.header('X-Total-Count', universities.length)
-            return response.json(universities)
-        })
-        .catch(_ => response.status(400).json({ message: 'Falha ao buscar as Universidades' }))
-
-}
-
 const listCourses = async (request, response) => {
 
     // Pegando o Curso escolhido pelo usuário 
@@ -134,4 +102,4 @@ const update = async (request, response) => {
 
 }
 
-module.exports = { create, listByName, listByCity, listCourses, remove, update }
+module.exports = { create, listCourses, remove, update }
