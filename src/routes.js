@@ -34,11 +34,7 @@ routes.delete('/university', UniversityValidator.remove(), authorization.require
 
 // Rotas pertencentes aos cursos
 routes.get('/course/:id', CourseValidator.listByID(), CourseController.listById)
-routes.get('/course/name/:name', CourseValidator.listByName(), CourseController.listByName)
-
-routes.get('/course/ies/:ies', CourseValidator.listByIes(), CourseController.listByIes)
-routes.get('/course/city/:city', CourseValidator.listByCity(), CourseController.listByCity)
-
+routes.get('/course/search/:option', CourseValidator.list(), CourseController.list)
 routes.post('/course', CourseValidator.create(), integrity.courseAttributes, authorization.required, CourseController.create)
 routes.delete('/course/:id', CourseValidator.remove(), authorization.required, CourseController.remove)
 routes.put('/course/:id',

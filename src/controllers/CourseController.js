@@ -27,57 +27,21 @@ const create = async (request, response) => {
         .catch(_ => response.status(500).json({ message: 'Falha ao criar' }))
 }
 
-const listByName = async (request, response) => {
+const list = async (request, response) => {
 
     // Pegando o Curso escolhido pelo usuário 
-    const { name } = request.params
-
-    // Buscando lista de cursos
-    await connection('course')
-        .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
-        .where('course.name', 'like', `%${name}%`)
-        .select(CONSTANTS.universityAndCourseData)
-        .then(courses => {
-            response.header('X-Total-Count', courses.length)
-            return response.json(courses)
-        })
-        .catch(_ => response.status(500).json({ message: 'Erro no sistema' }))
-
-}
-
-const listByCity = async (request, response) => {
-
-    // Pegando o Curso escolhido pelo usuário 
-    const { city } = request.params
-
-    // Buscando lista de cursos
-    await connection('course')
-        .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
-        .where('university.city', 'like', `%${city}%`)
-        .select(CONSTANTS.universityAndCourseData)
-        .then(courses => {
-            response.header('X-Total-Count', courses.length)
-            return response.json(courses)
-        })
-        .catch(_ => response.status(500).json({ message: 'Erro no sistema' }))
-
-}
-
-const listByIes = async (request, response) => {
-
-    // Pegando o Curso escolhido pelo usuário 
-    const { ies } = request.params
+    const { option } = request.params
+    
+    const { text } = request.query
     
     // Buscando lista de cursos
-    await connection('course')
-        .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
-        .where('university.ies', 'like', `%${ies}%`)
-        .select(CONSTANTS.universityAndCourseData)
+    await connection('v_course')
+        .where(`${option}`, 'like', `%${text}%`)
         .then(courses => {
             response.header('X-Total-Count', courses.length)
             return response.json(courses)
         })
-        .catch(_ => response.status(500).json({ message: 'Erro no sistema' }))
+        .catch(_ => response.status(400).json({ message: 'Informações incorretas' }))
 
 }
 
@@ -153,9 +117,7 @@ const update = async (request, response) => {
 
 module.exports = {
     create,
-    listByName,
-    listByIes,
-    listByCity,
+    list,
     listById,
     remove,
     update

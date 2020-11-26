@@ -16,25 +16,14 @@ const create = _ => celebrate({
     })
 })
 
-const listByName = _ => celebrate({
+const list = _ => celebrate({
 
     [Segments.PARAMS]: Joi.object().keys({
-        name: Joi.string().required()
-    })
-})
+        option: Joi.string().required()
+    }),
 
-
-const listByIes = _ => celebrate({
-
-    [Segments.PARAMS]: Joi.object().keys({
-        ies: Joi.string().required()
-    })
-})
-
-const listByCity = _ => celebrate({
-
-    [Segments.PARAMS]: Joi.object().keys({
-        city: Joi.string().required()
+    [Segments.QUERY]: Joi.object().keys({
+        text: Joi.string().required()
     })
 })
 
@@ -80,9 +69,7 @@ const update = _ => celebrate({
 
 module.exports = {
     create,
-    listByName,
-    listByIes,
-    listByCity,
+    list,
     listByID,
     remove,
     update

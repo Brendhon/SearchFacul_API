@@ -42,31 +42,20 @@ describe("Course", () => {
         await connection.destroy() // Apos TODOS os testes serem executados destrua a conexão
     })
 
-    it("Should be able to list a Course by name", async () => {
+    it("Should be able to list a Course", async () => {
         const response = await request(app)
-            .get('/course/name/computação')
+            .get('/course/search/name?text=comp')
 
         expect(response.body[0]).toHaveProperty('name')
         expect(response.body[0]).toHaveProperty('IES')
         expect(response.body).toHaveLength(1);
     })
-    
-    it("Should be able to list a course by city", async () => {
 
+    it("Shouldn't be able to list a Course without text", async () => {
         const response = await request(app)
-            .get('/course/city/santa')
+            .get('/course/search/name')
 
-        expect(response.body[0].id).toBeTruthy()
-        expect(response.body[0].city).toBe('Santa Rita')
-    })
-
-    it("Should be able to list a course by ies", async () => {
-
-        const response = await request(app)
-            .get('/course/ies/inatel')
-
-        expect(response.body[0].id).toBeTruthy()
-        expect(response.body[0].IES).toBe('Inatel')
+        expect(response.body.statusCode).toBe(400)
     })
 
     it("Should be able to list a Course by id", async () => {
