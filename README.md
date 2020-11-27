@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.com/Brendhon/SearchFacul_API.svg?branch=main)](https://travis-ci.com/Brendhon/SearchFacul_API)
 
-# SearchFacul
+# Search Facul
 
 🚧  Em construção...  🚧
 
