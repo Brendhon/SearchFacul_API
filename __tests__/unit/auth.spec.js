@@ -2,6 +2,7 @@ const { encryptPassword, comparePassword  } = require('../../src/utils/auth')
 
 describe("Auth", () => {
 
+    // Atributos
     let password
     let samePassword
 

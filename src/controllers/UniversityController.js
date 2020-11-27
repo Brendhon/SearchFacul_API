@@ -33,15 +33,13 @@ const listCourses = async (request, response) => {
     const { id } = request.params
 
     // Buscando lista de cursos referente a uma faculdade especifica 
-    await connection('course')
-        .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
+    await connection('v_course')
         .where('university_id', id)
-        .select(CONSTANTS.universityAndCourseData)
         .then(courses => {
             response.header('X-Total-Count', courses.length) // Passando o total de elementos
             return response.json(courses)
         })
-        .catch(_ => response.status(400).json({ message: 'Falha ao buscar as Universidades' }))
+        .catch(_ => response.status(400).json({ message: 'Falha ao buscar' }))
 
 }
 

@@ -19,6 +19,7 @@ describe("Course", () => {
             .post('/university')
             .send(CONSTANTS.universityExample)
 
+        // Iniciando uma sessão 
         const response = await request(app)
             .post('/session')
             .send(CONSTANTS.loginExample)

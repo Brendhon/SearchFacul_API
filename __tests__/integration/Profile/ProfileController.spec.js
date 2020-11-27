@@ -19,6 +19,7 @@ describe("Profile", () => {
             .post('/university')
             .send(CONSTANTS.universityExample)
 
+        // Realizando um login
         const response = await request(app)
             .post('/session')
             .send(CONSTANTS.loginExample)
