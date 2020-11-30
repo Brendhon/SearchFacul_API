@@ -96,7 +96,7 @@ const update = async (request, response) => {
         .where('id', university_id)
         .update(universityAttributes)
         .then(_ => response.status(204).send())
-        .catch(_ => response.status(400).json({ message: 'Falha ao criar' }))
+        .catch(_ => response.status(400).json({ message: 'Falha ao Editar!! É possível que este email já esteja sendo utilizado!' }))
 
 }
 
