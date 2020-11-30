@@ -25,7 +25,7 @@ const universityExample2 = {
 const courseExample = {
     name: "Engenharia de computação",
     description: "Melhor Curso",
-    duration: "5 anos",
+    duration: 5,
     titration: "Bacharelado",
     modality: "Presencial",
     score: 4
@@ -34,7 +34,7 @@ const courseExample = {
 const courseExample2 = {
     name: "Engenharia de Produção",
     description: "ADM com CREA",
-    duration: "5 anos",
+    duration: 4,
     titration: "Bacharelado",
     modality: "Presencial",
     score: 4
