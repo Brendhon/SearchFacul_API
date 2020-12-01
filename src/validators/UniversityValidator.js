@@ -42,7 +42,7 @@ const update = _ => celebrate({
         city: Joi.string(),
         address: Joi.string(),
         category: Joi.string(),
-        site: Joi.string().uri()
+        site: Joi.string().uri().default(null)
     }),
 
     [Segments.HEADERS]: Joi.object({

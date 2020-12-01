@@ -63,7 +63,7 @@ const update = _ => celebrate({
         duration: Joi.number(),
         titration: Joi.string(),
         modality: Joi.string(),
-        score: Joi.number().min(1).max(5)
+        score: Joi.number().default(null)
     })
 })
 
