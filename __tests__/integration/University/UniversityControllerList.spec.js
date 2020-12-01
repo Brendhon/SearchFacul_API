@@ -32,20 +32,22 @@ describe("University", () => {
         await connection.destroy() // Apos TODOS os testes serem executados destrua a conexão
     })
 
-    it("Should be able to list all courses belonging to university", async () => {
-
-        // Inserindo um Curso no banco como teste
-        await request(app)
-            .post('/course')
-            .set("Authorization", token)
-            .send(CONSTANTS.courseExample)
+    it("Should be able to list all data belonging to the university", async () => {
 
         const response = await request(app)
-            .get('/university/1')
+            .get('/university')
+            .set("Authorization", token)
 
-        expect(response.body[0].id).toBeTruthy()
-        expect(response.body[0].score).toBe(4)
+        expect(response.body.id).toBeTruthy()
+        expect(response.body.IES).toBe("Inatel")
 
+    })
 
+    it("Shouldn't be able to list all data belonging to the university without authorization", async () => {
+
+        const response = await request(app)
+            .get('/university')
+
+        expect(response.status).toBe(400)
     })
 })

@@ -23,11 +23,12 @@ const remove = _ => celebrate({
 
 })
 
-const listCourses = _ => celebrate({
+const list = _ => celebrate({
 
-    [Segments.PARAMS]: Joi.object().keys({
-        id: Joi.string().required()
-    })
+    [Segments.HEADERS]: Joi.object({
+        authorization: Joi.string().required(),
+    }).unknown() //Como vários parâmetros são enviados pelo header o "unknown()" serve para descartar os que não foram validados
+
 })
 
 const update = _ => celebrate({
@@ -49,4 +50,4 @@ const update = _ => celebrate({
     }).unknown() //Como vários parâmetros são enviados pelo header o "unknown()" serve para descartar os que não foram validados
 })
 
-module.exports = { create, remove, listCourses, update }
+module.exports = { create, remove, list, update }

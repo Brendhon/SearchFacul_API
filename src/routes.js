@@ -23,7 +23,10 @@ routes.post('/session', SessionValidator.create(), SessionController.create)
 routes.get('/profile', ProfileValidator.listCourses(), authorization.required, ProfileController.list)
 
 // Rotas pertencentes a Universidades
-routes.get('/university/:id', UniversityValidator.listCourses(), UniversityController.listCourses)
+routes.get('/university',
+    UniversityValidator.list(),
+    authorization.required,
+    UniversityController.list)
 routes.put('/university',
     UniversityValidator.update(),
     integrity.universityAttributes,
