@@ -31,12 +31,12 @@ const list = async (request, response) => {
 
     // Pegando o Curso escolhido pelo usuário 
     const { option } = request.params
-    
+
     const { text } = request.query
-    
+
     // Buscando lista de cursos
     await connection('v_course')
-        .where(`${option}`, 'like', `%${text}%`)
+        .where(`${option.toLowerCase()}`, 'LIKE', `%${text.toLowerCase()}%`)
         .then(courses => {
             response.header('X-Total-Count', courses.length)
             return response.json(courses)
