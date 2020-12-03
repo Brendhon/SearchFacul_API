@@ -130,6 +130,19 @@ describe("Course", () => {
         expect(response.body.validation.body.keys).toEqual(["modality"])
     })
 
+    it("Shouldn't be able to create a new Course without period", async () => {
+
+        delete courseExample["period"]  // Removendo atributo desejado
+
+        const response = await request(app)
+            .post('/course')
+            .set("Authorization", token)
+            .send(courseExample)
+
+        expect(response.body.statusCode).toBe(400)
+        expect(response.body.validation.body.keys).toEqual(["period"])
+    })
+
     it("Should be able to create a new Course without score", async () => {
 
         delete courseExample["score"]  // Removendo atributo desejado
