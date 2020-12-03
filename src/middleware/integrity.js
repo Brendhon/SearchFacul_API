@@ -15,10 +15,10 @@ const universityAttributes = (request, response, next) => {
 const courseAttributes = (request, response, next) => {
 
     // Realizando um destruction no objeto vindo da requisição
-    const { name, description, duration, titration, modality, score } = request.body
+    const { name, description, duration, titration, modality, period, score } = request.body
 
     // Criando variável para armazenar atributos da universidade
-    const courseAttributes = { name, description, duration, titration, modality, score }
+    const courseAttributes = { name, description, duration, titration, modality, period, score }
 
     request.body.courseAttributes = courseAttributes
 

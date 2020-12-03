@@ -8,6 +8,7 @@ exports.up = function(knex) {
         table.decimal('duration').notNullable();
         table.string('titration').notNullable();
         table.string('modality').notNullable();
+        table.string('period').notNullable();
         table.decimal('score');
 
         table.string('university_id').notNullable();

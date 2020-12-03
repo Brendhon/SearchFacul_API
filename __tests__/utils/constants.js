@@ -28,6 +28,7 @@ const courseExample = {
     duration: 5,
     titration: "Bacharelado",
     modality: "Presencial",
+    period: "Integral",
     score: 4
 }
 
@@ -37,6 +38,7 @@ const courseExample2 = {
     duration: 4,
     titration: "Bacharelado",
     modality: "Presencial",
+    period: "Noturno",
     score: 4
 }
 

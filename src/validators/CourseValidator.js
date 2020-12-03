@@ -12,6 +12,7 @@ const create = _ => celebrate({
         duration: Joi.number().required(),
         titration: Joi.string().required(),
         modality: Joi.string().required(),
+        period: Joi.string().required(),
         score: Joi.number().min(1).max(5)
     })
 })
@@ -63,6 +64,7 @@ const update = _ => celebrate({
         duration: Joi.number(),
         titration: Joi.string(),
         modality: Joi.string(),
+        period: Joi.string(),
         score: Joi.number().default(null)
     })
 })
