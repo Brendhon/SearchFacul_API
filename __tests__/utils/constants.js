@@ -1,5 +1,5 @@
 const universityExample = {
-    IES: "Inatel",
+    ies: "Inatel",
     telephone: "34546789",
     email: "guilherme@gmail.br",
     password: "123",
@@ -11,7 +11,7 @@ const universityExample = {
 }
 
 const universityExample2 = {
-    IES: "Unifei",
+    ies: "Unifei",
     telephone: "34546789",
     email: "guilherme@hotmail.com",
     password: "456",

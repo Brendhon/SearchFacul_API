@@ -32,16 +32,16 @@ describe("University", () => {
         expect(response.body).toHaveProperty('id')
     })
 
-    it("Shouldn't be able to create a new University without 'IES'", async () => {
+    it("Shouldn't be able to create a new University without 'ies'", async () => {
 
-        delete universityExample["IES"]  // Removendo atributo desejado
+        delete universityExample["ies"]  // Removendo atributo desejado
 
         const response = await request(app)
             .post('/university')
             .send(universityExample)
 
         expect(response.body.statusCode).toBe(400)
-        expect(response.body.validation.body.keys).toEqual(["IES"])
+        expect(response.body.validation.body.keys).toEqual(["ies"])
     })
 
     it("Shouldn't be able to create a new University without 'telephone'", async () => {

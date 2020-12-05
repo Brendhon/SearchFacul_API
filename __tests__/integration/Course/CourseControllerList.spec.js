@@ -48,7 +48,7 @@ describe("Course", () => {
             .get('/course/search/name?text=comp')
 
         expect(response.body[0]).toHaveProperty('name')
-        expect(response.body[0]).toHaveProperty('IES')
+        expect(response.body[0]).toHaveProperty('ies')
         expect(response.body).toHaveLength(1);
     })
 
@@ -64,7 +64,7 @@ describe("Course", () => {
             .get('/course/2')
 
         expect(response.body).toHaveProperty('name')
-        expect(response.body).toHaveProperty('IES')
+        expect(response.body).toHaveProperty('ies')
         expect(response.body.name).toBe("Engenharia de Produção");
     })
 })

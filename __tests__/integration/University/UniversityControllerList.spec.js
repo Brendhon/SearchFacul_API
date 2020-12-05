@@ -39,7 +39,7 @@ describe("University", () => {
             .set("Authorization", token)
 
         expect(response.body.id).toBeTruthy()
-        expect(response.body.IES).toBe("Inatel")
+        expect(response.body.ies).toBe("Inatel")
 
     })
 

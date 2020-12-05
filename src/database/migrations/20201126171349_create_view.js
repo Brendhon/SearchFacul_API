@@ -2,7 +2,7 @@ exports.up = function (knex) {
     return knex.schema.raw(`CREATE VIEW IF NOT EXISTS v_course AS SELECT ??, ??, ??, ??, ??, ??, ??, ??, ?? 
         FROM course INNER JOIN university ON ?? = ??`, [
         "course.*",
-        "university.IES",
+        "university.ies",
         'university.email',
         'university.city',
         'university.telephone',
