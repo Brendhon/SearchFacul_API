@@ -1,10 +1,20 @@
 language: node_js
 
+services:
+  - postgresql
+
+env:
+  - DB_USERNAME = "postgres"
+  - DB_NAME_TEST="myapp_test"
+  - DB_PASSWORD = ""
+
 node_js:
   - 12
 
 before_script:
     - npm i
+    - psql -c 'create database myapp_test;' -U postgres
+    - npx knex migrate:latest
     
 script:
     - npm test
