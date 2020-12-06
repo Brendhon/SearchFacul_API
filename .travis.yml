@@ -1,20 +1,23 @@
 language: node_js
+   node_js: 
+     - “stable”
+
+install: 
+   - npm install
 
 services:
   - postgresql
 
-env:
-  - DB_USERNAME = "postgres"
-  - DB_NAME_TEST="myapp_test"
-  - DB_PASSWORD = ""
-
-node_js:
-  - 12
+env: 
+  global: 
+    - DB_USERNAME = "postgres"
+    - DB_NAME_TEST="myapp_test"
+    - DB_PASSWORD = ""
 
 before_script:
-    - npm i
+    - npm install -g knex 
     - psql -c 'create database myapp_test;' -U postgres
-    - npx knex migrate:latest
+    - knex migrate:latest
     
 script:
     - npm test
