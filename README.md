@@ -40,7 +40,7 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 **[Git](https://git-scm.com)**, **[Node.js](https://nodejs.org/en/)** e **[PostgreSQL](https://www.postgresql.org/)**.<br> 
 
-Para rodar localmente é necessário que você crie o seu banco de dados (não é necessário criar as tabelas). Logo após isso, crie um arquivo (.env) na raiz do projeto e coloque nele as informações de acesso (username, password, name) no formato demostrado abaixo: 
+Para rodar localmente é necessário que você crie o seu banco de dados (não é necessário criar as tabelas). Logo após isso, crie um arquivo (.env) na raiz do projeto e coloque nele as informações de acesso (username, password e name) no formato demostrado abaixo: 
 ```
 DB_NAME=<NOME_DO_BANCO>
 DB_USERNAME=<USERNAME_DO_BANCO>
