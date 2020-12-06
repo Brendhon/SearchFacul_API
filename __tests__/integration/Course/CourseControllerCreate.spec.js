@@ -44,7 +44,8 @@ describe("Course", () => {
             .set("Authorization", token)
             .send(courseExample)
 
-        expect(response.body).toHaveProperty('id')
+
+        expect(response.status).toBe(204)
     })
 
     it("Shouldn't be able to create a new Course without authorization", async () => {
@@ -152,7 +153,7 @@ describe("Course", () => {
             .set("Authorization", token)
             .send(courseExample)
 
-        expect(response.body).toHaveProperty('id')
+        expect(response.status).toBe(204)
     })
 
     it("Shouldn't be able to create a new Course with incorrect score", async () => {

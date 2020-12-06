@@ -1,6 +1,6 @@
 const universityAndCourseData = [
     'course.*', //Selecionando todos os dados dos cursos 
-    'university.IES',
+    'university.ies',
     'university.email',
     'university.city',
     'university.telephone',
@@ -12,7 +12,7 @@ const universityAndCourseData = [
 
 const universityData = [
     'university.id',
-    'university.IES',
+    'university.ies',
     'university.email',
     'university.city',
     'university.telephone',

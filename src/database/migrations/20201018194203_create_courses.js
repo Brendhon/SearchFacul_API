@@ -11,7 +11,7 @@ exports.up = function(knex) {
         table.string('period').notNullable();
         table.decimal('score');
 
-        table.string('university_id').notNullable();
+        table.integer('university_id').notNullable();
 
         // Chave estrangeira
         table.foreign('university_id').references('id').inTable('university');

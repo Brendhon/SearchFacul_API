@@ -58,13 +58,4 @@ describe("Course", () => {
 
         expect(response.body.statusCode).toBe(400)
     })
-
-    it("Should be able to list a Course by id", async () => {
-        const response = await request(app)
-            .get('/course/2')
-
-        expect(response.body).toHaveProperty('name')
-        expect(response.body).toHaveProperty('ies')
-        expect(response.body.name).toBe("Engenharia de Produção");
-    })
 })

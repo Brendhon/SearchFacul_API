@@ -22,7 +22,7 @@ const create = async (request, response) => {
     // Inserindo dados na tabela
     await connection('university')
         .insert(universityAttributes)
-        .then(([id]) => response.json({ id })) // Retornando o ID como resposta 
+        .then(_ => response.status(204).send()) // Retornando o ID como resposta 
         .catch(_ => response.status(400).json({ message: 'Falha ao criar' }))
 
 }

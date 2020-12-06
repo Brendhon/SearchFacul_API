@@ -23,7 +23,7 @@ const create = async (request, response) => {
             ...courseAttributes,
             university_id
         })
-        .then(([id]) => response.json({ id })) // Retornando o ID como resposta 
+        .then(_ => response.status(204).send()) // Retornando o ID como resposta 
         .catch(_ => response.status(500).json({ message: 'Falha ao criar' }))
 }
 
@@ -36,28 +36,12 @@ const list = async (request, response) => {
 
     // Buscando lista de cursos
     await connection('v_course')
-        .where(`${option.toLowerCase()}`, 'LIKE', `%${text.toLowerCase()}%`)
+        .whereRaw('LOWER(REMOVE_ACCENTUATION(??)) LIKE LOWER(REMOVE_ACCENTUATION(?))', [option, `%${text}%`])
         .then(courses => {
             response.header('X-Total-Count', courses.length)
             return response.json(courses)
         })
-        .catch(_ => response.status(400).json({ message: 'Informações incorretas' }))
-
-}
-
-const listById = async (request, response) => {
-
-    // Pegando o Curso escolhido pelo usuário 
-    const { id } = request.params
-
-    // Buscando lista de cursos
-    await connection('course')
-        .join('university', 'university.id', '=', 'course.university_id') // Realizando um JOIN para pegar os dados da universidade
-        .where('course.id', id)
-        .select(CONSTANTS.universityAndCourseData)
-        .first() // Pegando o primeiro que ele encontrar
-        .then(courses => response.json(courses))
-        .catch(_ => response.status(500).json({ message: 'Erro no sistema' }))
+        .catch(err => response.status(400).json(err))
 
 }
 
@@ -118,7 +102,6 @@ const update = async (request, response) => {
 module.exports = {
     create,
     list,
-    listById,
     remove,
     update
 }

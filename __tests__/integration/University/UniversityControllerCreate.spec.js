@@ -29,7 +29,7 @@ describe("University", () => {
             .post('/university')
             .send(universityExample)
 
-        expect(response.body).toHaveProperty('id')
+        expect(response.status).toBe(204)
     })
 
     it("Shouldn't be able to create a new University without 'ies'", async () => {
@@ -69,7 +69,7 @@ describe("University", () => {
     })
 
     it("Shouldn't be able to create a new University without 'password'", async () => {
-        
+
         delete universityExample["password"]  // Removendo atributo desejado
 
         const response = await request(app)
@@ -138,7 +138,7 @@ describe("University", () => {
             .post('/university')
             .send(universityExample)
 
-        expect(response.body).toHaveProperty('id')
+        expect(response.status).toBe(204)
     })
 
     it("Shouldn't be able to create a new University with incorrect UF", async () => {
@@ -154,7 +154,7 @@ describe("University", () => {
     })
 
     it("Shouldn't be able to create a new University with incorrect telephone", async () => {
-        
+
         universityExample.telephone = "34546789a"
 
         const response = await request(app)
@@ -178,7 +178,7 @@ describe("University", () => {
     })
 
     it("Shouldn't be able to create a new University with incorrect 'email'", async () => {
-        
+
         universityExample.email = "guilherme"
 
         const response = await request(app)
