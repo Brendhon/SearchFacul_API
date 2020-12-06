@@ -1,5 +1,4 @@
 const connection = require('../database/connection')
-const CONSTANTS = require('../utils/constants')
 
 const create = async (request, response) => {
 

@@ -10,7 +10,7 @@ const routes = require('./routes') //Importando as rotas
 const app = express()
 
 // Middleware
-app.use(cors()) // Permitir que as aplicações frontend possam acessar a api
+app.use(cors()) // Permitir que a aplicação frontend possa acessar a api
 app.use(express.json()) // Ativando a utilização de JSON
 app.use(routes) // Utilizando as rotas
 app.use(errors()) // Usando os erros do celebrate
