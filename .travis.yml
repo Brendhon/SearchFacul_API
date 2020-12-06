@@ -8,7 +8,6 @@ install:
 services:
   - postgresql
 
-  
 env: 
   global: 
     - DB_USERNAME = "postgres"
