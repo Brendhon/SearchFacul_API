@@ -2,11 +2,10 @@
 
 # Search Facul
 
-🚧  Em construção...  🚧
-
----
+<img src="src\assets\logo.svg" width="200px;" alt="logo"/>
 
 ## 🎓 Sobre o projeto
+
 Este projeto tem como objetivo colocar em prática os conhecimentos adquiridos na disciplina de **C214** (Engenharia de Software) durante a graduação em Engenharia de Computação pelo **[Inatel](https://inatel.br/home/)**
 
 ---
@@ -18,7 +17,7 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
  - **[Express](https://expressjs.com/pt-br/)**
  - **[CORS](https://expressjs.com/en/resources/middleware/cors.html)**
  - **[Nodemon](https://nodemon.io/)**
- - **[SQLite](https://github.com/mapbox/node-sqlite3)**
+ - **[PostgreSQL](https://www.postgresql.org/)**
  - **[Knex.js](http://knexjs.org/)**
  - **[Celebrate](https://github.com/arb/celebrate)**
  - **[Jest](https://jestjs.io/)**
@@ -39,10 +38,18 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
 #### Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
-**[Git](https://git-scm.com)** e **[Node.js](https://nodejs.org/en/)**.<br> 
+**[Git](https://git-scm.com)**, **[Node.js](https://nodejs.org/en/)** e **[PostgreSQL](https://www.postgresql.org/)**.<br> 
+
+Para rodar localmente é necessário que você crie o seu banco de dados (não é necessário criar as tabelas). Logo após isso, crie um arquivo (.env) na raiz do projeto e coloque nele as informações de acesso (username, password, name) no formato demostrado abaixo: 
+```
+DB_NAME=<NOME_DO_BANCO>
+DB_USERNAME=<USERNAME_DO_BANCO>
+DB_PASSWORD=<SENHA_DO_BANCO>
+```
+
 Recomendações:
 * Um editor para trabalhar com o código como **[VSCode](https://code.visualstudio.com/)**
-* (Opcional) Crie um arquivo (.env) na raiz do projeto para que possa utilizar um segredo de sua escolha, o arquivo deve conter a seguinte variável:
+* (Opcional) No arquivo **.env** insira um segredo de sua escolha, a variável deve ser escrita da seguinte forma:
     ```
     AUTH_SECRET=<SECRET>
     ```
@@ -84,7 +91,7 @@ $ npm test
 ---
 
 ## 👥 Autor
-<img style="border-radius: 20%;" src="https://avatars1.githubusercontent.com/u/52840078?s=400&u=67bc81db89b5abf12cf592e0c610426afd3a02f4&v=4" width="120px;" alt="120px"/><br>
+<img style="border-radius: 20%;" src="https://avatars1.githubusercontent.com/u/52840078?s=400&u=67bc81db89b5abf12cf592e0c610426afd3a02f4&v=4" width="120px;" alt="autor"/><br>
 **Brendhon Moreira**
 
 [![Linkedin Badge](https://img.shields.io/badge/-Brendhon-blue?style=flat-square&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/brendhon-moreira)](https://www.linkedin.com/in/brendhon-moreira)
