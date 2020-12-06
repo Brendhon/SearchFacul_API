@@ -4,12 +4,12 @@ exports.up = function(knex) {
         table.increments();
 
         table.string('name').notNullable();
-        table.string('description').notNullable();
-        table.decimal('duration').notNullable();
+        table.string('description', 1000).notNullable();
+        table.integer('duration').notNullable();
         table.string('titration').notNullable();
         table.string('modality').notNullable();
         table.string('period').notNullable();
-        table.decimal('score');
+        table.integer('score');
 
         table.integer('university_id').notNullable();
 
