@@ -43,7 +43,7 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
 ---
 ## Como executar o projeto
 
-#### Pré-requisitos
+#### 💡 Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 **[Git](https://git-scm.com)**, **[Node.js](https://nodejs.org/en/)** e **[PostgreSQL](https://www.postgresql.org/)**.<br> 
