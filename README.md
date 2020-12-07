@@ -1,8 +1,20 @@
 [![Build Status](https://travis-ci.com/Brendhon/SearchFacul_API.svg?branch=main)](https://travis-ci.com/Brendhon/SearchFacul_API)
 
-# Search Facul
+<div style="text-align:center">
+    <h1>Search Facul</h1>
+    <img src="src\assets\logo.svg" width="200px;" alt="logo"/>
+</div>
 
-<img src="src\assets\logo.svg" width="200px;" alt="logo"/>
+---
+
+## 🎓 Sobre o projeto
+
+O Search Facul é uma plataforma que tem como propósito facilitar a busca de estudantes por faculdades e seus cursos. O estudante pode em uma única plataforma: 
+ - Pesquisar por todas as informações de cursos em uma cidade;
+ - Pesquisar por um curso de escolha;
+ - Pesquisar os cursos em uma faculdade específica.
+
+Este é a API do projeto **[Search Facul](https://github.com/Brendhon/SearchFacul_Web)** que tem como objetivo colocar em prática os conhecimentos adquiridos na disciplina de **C214** (Engenharia de Software) durante a graduação em Engenharia de Computação pelo **[Inatel](https://inatel.br/home/)** e dos conhecimentos adquiridos sobre desenvolvimento Web nos cursos disponibilizados pela **[COD3R](https://www.cod3r.com.br/)**.
 
 ## 🎓 Sobre o projeto
 
