@@ -38,7 +38,7 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
 > Veja o arquivo  **[package.json](https://github.com/Brendhon/SearchFacul_API/blob/main/package.json)**
 
 ### Utilitários
-- Editor:  **[Visual Studio Code](https://code.visualstudio.com/)**  → Extensions:  **[SQLite](https://marketplace.visualstudio.com/items?itemName=alexcvzz.vscode-sqlite)**
+- Editor:  **[Visual Studio Code](https://code.visualstudio.com/)**
 - Teste de API:  **[Insomnia](https://insomnia.rest/)**
 ---
 ## Como executar o projeto
