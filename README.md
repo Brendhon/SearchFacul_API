@@ -16,10 +16,6 @@ O Search Facul é uma plataforma que tem como propósito facilitar a busca de es
 
 Este repositório contêm a API do projeto **[Search Facul](https://github.com/Brendhon/SearchFacul_Web)** que tem como objetivo colocar em prática os conhecimentos adquiridos na disciplina de **C214** (Engenharia de Software) durante a graduação em Engenharia de Computação pelo **[Inatel](https://inatel.br/home/)** e dos conhecimentos adquiridos sobre desenvolvimento Web nos cursos disponibilizados pela **[COD3R](https://www.cod3r.com.br/)**.
 
-## 🎓 Sobre o projeto
-
-API do projeto Search Facul desenvolvido com o objetivo colocar em prática os conhecimentos adquiridos na disciplina de **C214** (Engenharia de Software) durante a graduação em Engenharia de Computação pelo **[Inatel](https://inatel.br/home/)** e dos conhecimentos adquiridos sobre desenvolvimento Web.
-
 ---
 
 ## 🛠 Tecnologias
