@@ -1,9 +1,9 @@
 [![Build Status](https://travis-ci.com/Brendhon/SearchFacul_API.svg?branch=main)](https://travis-ci.com/Brendhon/SearchFacul_API)
 
-<div style="text-align:center">
-    <h1>Search Facul</h1>
+<h1 align="center">Search Facul</h1>
+<h1 align="center">
     <img src="src\assets\logo.svg" width="300px;" alt="logo"/>
-</div>
+</h1>
 
 ---
 
