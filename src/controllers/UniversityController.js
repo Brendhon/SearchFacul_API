@@ -29,10 +29,9 @@ const create = async (request, response) => {
 
 const list = async (request, response) => {
 
-    // Pegando o Curso escolhido pelo usuário 
     const { university_id } = request
 
-    // Buscando lista de cursos referente a uma faculdade especifica 
+    // Buscando os dados de uma faculdade 
     await connection('university')
         .where('id', university_id)
         .select(CONSTANTS.universityData)
@@ -49,7 +48,7 @@ const remove = async (request, response) => {
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const { university_id } = request
 
-    // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso (EVITAR QUE UMA UNIVERSIDADE EXCLUA A OUTRA)
+    // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso
     const university = await connection('university')
         .where('id', university_id)  // Comparando o ID escolhido com o do banco
         .select('id')

@@ -10,8 +10,9 @@ const create = async (request, response) => {
         .where('email', email)
         .first()
         .then(async university => {
-
-            if (!university) return response.status(400).json({ message: 'Email não cadastrado' }) // Verificando se Universidade foi encontrada
+            
+            // Verificando se Universidade foi encontrada
+            if (!university) return response.status(400).json({ message: 'Email não cadastrado' }) 
 
             const samePassword = await comparePassword(password, university.password)
 
@@ -19,7 +20,7 @@ const create = async (request, response) => {
                 token: encodeJwt({id: university.id, email: university.email})
             }) // Retornando o token como resposta 
             
-            else return response.status(400).json({ message: 'Senha incorreta' }) // Verificando se Universidade foi encontrada
+            else return response.status(400).json({ message: 'Senha incorreta' })
 
         })
         .catch(_ => response.status(500).json({ message: 'Falha ao criar a sessão' }))

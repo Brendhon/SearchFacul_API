@@ -19,7 +19,7 @@ const remove = _ => celebrate({
 
     [Segments.HEADERS]: Joi.object({
         authorization: Joi.string().required(),
-    }).unknown() //Como vários parâmetros são enviados pelo header o "unknown()" serve para descartar os que não foram validados
+    }).unknown()
 
 })
 
@@ -27,7 +27,7 @@ const list = _ => celebrate({
 
     [Segments.HEADERS]: Joi.object({
         authorization: Joi.string().required(),
-    }).unknown() //Como vários parâmetros são enviados pelo header o "unknown()" serve para descartar os que não foram validados
+    }).unknown()
 
 })
 
@@ -47,7 +47,7 @@ const update = _ => celebrate({
 
     [Segments.HEADERS]: Joi.object({
         authorization: Joi.string().required(),
-    }).unknown() //Como vários parâmetros são enviados pelo header o "unknown()" serve para descartar os que não foram validados
+    }).unknown()
 })
 
 module.exports = { create, remove, list, update }

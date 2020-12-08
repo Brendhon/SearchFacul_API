@@ -1,6 +1,5 @@
 //Importando a configuração de desenvolvimento
 const connection = require('../database/connection')
-const CONSTANTS = require('../utils/constants')
 
 const list = async (request, response) => {
 

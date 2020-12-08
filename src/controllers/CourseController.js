@@ -16,7 +16,7 @@ const create = async (request, response) => {
 
     if (!university) return response.status(400).json({ message: 'Universidade não encontrada :(' })
 
-    // Realizando um destruction no array resultado da inserção para pegar o id gerado
+    // Inserindo os dodos
     await connection('course')
         .insert({
             ...courseAttributes,
@@ -28,7 +28,7 @@ const create = async (request, response) => {
 
 const list = async (request, response) => {
 
-    // Pegando o Curso escolhido pelo usuário 
+    // Pegando a opção escolhida pelo usuário 
     const { option } = request.params
 
     const { text } = request.query
@@ -52,7 +52,7 @@ const remove = async (request, response) => {
     // Utilizando o cabeçalho da requisição para verificar quem é o responsável por esse curso
     const { university_id } = request
 
-    // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso (EVITAR QUE UMA UNIVERSIDADE EXCLUA O CURSO DE OUTRA)
+    // Verificando se o ID da requisição é o mesmo ID do responsável pelo curso
     const course = await connection('course')
         .where('id', id)
         .select('university_id')
