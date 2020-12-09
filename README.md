@@ -48,7 +48,30 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 **[Git](https://git-scm.com)**, **[Node.js](https://nodejs.org/en/)** e **[PostgreSQL](https://www.postgresql.org/)**.<br> 
 
-Para rodar localmente é necessário que você crie o seu banco de dados (não é necessário criar as tabelas). Logo após isso, crie um arquivo (.env) na raiz do projeto e coloque nele as informações de acesso (username, password e name) no formato demostrado abaixo: 
+
+Para rodar localmente é necessário que você crie o seu banco de dados (não é necessário criar as tabelas).
+
+Aqui vai uma sugestão de como criar um banco de dados com o **PostgreSQL**:
+ - Faça o download no **[site](https://www.postgresql.org/download/)** oficial;
+ - Adicione-o no PATH do sistema para que o comando **_psql_** esteja disponível;
+ - Executar os seguintes comandos: 
+    ```bash
+    psql -U postgres 
+    # Será requisitado a senha que voce digitou ao instalar o postgres
+    
+    # Com isso poderá digitar comandos SQL
+    CREATE DATABASE <NOME_DO_BANCO>; # Substitua <NOME_DO_BANCO> pelo nome de sua escolha
+    ```
+Obs: Esta não é a única maneira de criar um database, recomendo uma olhada no **[ElephantSQL](https://www.elephantsql.com/)**.
+
+```bash
+
+# Clone este repositório
+$ git clone https://github.com/Brendhon/SearchFacul_API.git
+
+```
+
+Logo após isso, crie um arquivo (.env) na raiz do projeto e coloque nele as informações de acesso (username, password e name) no formato demostrado abaixo: 
 ```
 DB_NAME=<NOME_DO_BANCO>
 DB_USERNAME=<USERNAME_DO_BANCO>
@@ -64,15 +87,18 @@ Recomendações:
     
 ```bash
 
-# Clone este repositório
-$ git clone https://github.com/Brendhon/SearchFacul_API.git
-
-# Acesse a pasta do projeto
+# Na raiz do projeto execute:
 
 # Instale as dependências
 $ npm install
 
+# Execute as migrations
+$ npx knex migrate:latest
+
 ```
+
+Com isso o projeto já estará pronto para ser executado.
+
 #### ⚽ Rodando o servidor
 
 ```bash
