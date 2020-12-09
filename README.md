@@ -61,6 +61,9 @@ Aqui vai uma sugestão de como criar um banco de dados com o **PostgreSQL**:
     
     # Com isso poderá digitar comandos SQL
     CREATE DATABASE <NOME_DO_BANCO>; # Substitua <NOME_DO_BANCO> pelo nome de sua escolha
+
+    # Crie um banco de dados para o caso de teste 
+    CREATE DATABASE <NOME_DO_BANCO_TESTE>; # Substitua <NOME_DO_BANCO_TESTE> pelo nome de sua escolha
     ```
 Obs: Esta não é a única maneira de criar um database, recomendo uma olhada no **[ElephantSQL](https://www.elephantsql.com/)**.
 
@@ -76,6 +79,8 @@ Logo após isso, crie um arquivo (.env) na raiz do projeto e coloque nele as inf
 DB_NAME=<NOME_DO_BANCO>
 DB_USERNAME=<USERNAME_DO_BANCO>
 DB_PASSWORD=<SENHA_DO_BANCO>
+
+DB_NAME_TEST=<NOME_DO_BANCO_TESTE>
 ```
 
 Recomendações:
