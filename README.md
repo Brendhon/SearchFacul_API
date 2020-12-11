@@ -16,9 +16,9 @@ Este repositório contêm a API do projeto **[Search Facul](https://github.com/B
 
 ---
 
-## ⚒️ Tecnologias
+## 💻 Tecnologias
 
-As seguintes ferramentas foram utilizadas na construção do projeto:
+As seguintes tecnologias foram utilizadas na construção do projeto:
 
  - **[Express](https://expressjs.com/pt-br/)**
  - **[CORS](https://expressjs.com/en/resources/middleware/cors.html)**
