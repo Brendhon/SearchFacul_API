@@ -67,7 +67,7 @@ Aqui vai uma sugestão de como criar um banco de dados com o **PostgreSQL**:
     # Crie um banco de dados para o caso de teste 
     CREATE DATABASE <NOME_DO_BANCO_TESTE>; # Substitua <NOME_DO_BANCO_TESTE> pelo nome de sua escolha
     ```
-Obs: Esta não é a única maneira de criar um database, recomendo uma olhada no **[ElephantSQL](https://www.elephantsql.com/)**.
+Obs: Essa não é a única maneira de criar um database, recomendo uma olhada no **[ElephantSQL](https://www.elephantsql.com/)**.
 
 ```bash
 
