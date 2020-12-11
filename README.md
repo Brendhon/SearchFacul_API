@@ -6,7 +6,7 @@
     <img src="src\assets\logo.svg" width="300px;" alt="logo"/>
 </h1>
 
-<h3 align="center" style="font-size: 1">✅ Concluído ✅</h3>
+<h3 align="center">✅ Concluído ✅</h3>
 
 ## 🎓 Sobre o projeto
 
