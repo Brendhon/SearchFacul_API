@@ -136,4 +136,6 @@ $ npm test
 
 ---
 ## 📝 License
-**[MIT](https://choosealicense.com/licenses/mit/)**
+[![License](https://img.shields.io/apm/l/vim-mode?color=blue)](http://badges.mit-license.org)
+
+- **[MIT license](https://choosealicense.com/licenses/mit/)**
