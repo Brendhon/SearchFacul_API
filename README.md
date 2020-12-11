@@ -5,8 +5,6 @@
     <img src="src\assets\logo.svg" width="300px;" alt="logo"/>
 </h1>
 
----
-
 ## 🎓 Sobre o projeto
 
 O Search Facul é uma plataforma que tem como propósito facilitar a busca de informações sobre faculdades e cursos. O estudante pode em uma única plataforma: 
@@ -18,7 +16,7 @@ Este repositório contêm a API do projeto **[Search Facul](https://github.com/B
 
 ---
 
-## 🛠 Tecnologias
+## ⚒️ Tecnologias
 
 As seguintes ferramentas foram utilizadas na construção do projeto:
 
@@ -40,14 +38,15 @@ As seguintes ferramentas foram utilizadas na construção do projeto:
 ### Utilitários
 - Editor:  **[Visual Studio Code](https://code.visualstudio.com/)**
 - Teste de API:  **[Insomnia](https://insomnia.rest/)**
----
-## Como executar o projeto
 
-#### 💡 Pré-requisitos
+---
+
+## 👨‍💻 Como executar o projeto
+
+### 💡 Pré-requisitos
 
 Antes de começar, você vai precisar ter instalado em sua máquina as seguintes ferramentas:
 **[Git](https://git-scm.com)**, **[Node.js](https://nodejs.org/en/)** e **[PostgreSQL](https://www.postgresql.org/)**.<br> 
-
 
 Para rodar localmente é necessário que você crie o seu banco de dados (não é necessário criar as tabelas).
 
@@ -104,7 +103,7 @@ $ npx knex migrate:latest
 
 Com isso o projeto já estará pronto para ser executado.
 
-#### ⚽ Rodando o servidor
+### ⚽ Rodando o servidor
 
 ```bash
 
@@ -115,7 +114,7 @@ $ npm run dev
 
 ```
 
-#### 🤖 Rodando os testes automatizados
+### 🤖 Rodando os testes automatizados
 
 ```bash
 
@@ -125,7 +124,6 @@ $ npm test
 # Será gerada uma pasta (coverage) contendo uma página com os dados dos testes de forma mais detalhada
 
 ```
-
 
 ---
 
