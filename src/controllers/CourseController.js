@@ -26,6 +26,7 @@ const create = async (request, response) => {
         .catch(_ => response.status(500).json({ message: 'Falha ao criar' }))
 }
 
+
 const list = async (request, response) => {
 
     // Pegando a opção escolhida pelo usuário 
