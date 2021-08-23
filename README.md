@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.com/Brendhon/SearchFacul_API.svg?branch=main)](https://travis-ci.com/Brendhon/SearchFacul_API)
+[![Travis CI](https://img.shields.io/travis/com/Brendhon/SearchFacul_API?label=Travis%20CI&logo=Travis)](https://app.travis-ci.com/Brendhon/conecta-cafe-api)
 
 <h1 align="center">Search Facul</h1>
 
